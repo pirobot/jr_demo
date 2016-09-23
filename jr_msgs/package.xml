@@ -28,7 +28,6 @@
   <build_depend>message_generation</build_depend>
   <build_depend>std_msgs</build_depend>
   <build_depend>geometry_msgs/</build_depend>
-
   <build_depend>gps_common</build_depend>
   <build_depend>ar_track_alvar_msgs</build_depend>
 

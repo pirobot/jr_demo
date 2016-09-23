@@ -22,10 +22,11 @@
 """
 
 import rospy
-from jr_msgs.srv import SayPhrase
-from sound_play.libsoundplay import SoundClient
 import sys
+from jr_msgs.srv import SayPhrase, SayPhraseResponse
+from sound_play.libsoundplay import SoundClient
 from yaml import load
+from random import sample, randint
 
 class SayPhrases:
     def __init__(self, script_path):
@@ -53,9 +54,7 @@ class SayPhrases:
         # Load the configuration parameters
         with open(config_file, 'r') as config:
             self.phrases = load(config)
-        
-        rospy.loginfo(self.phrases)
-        
+                
         # Create the sound client object
         self.soundhandle = SoundClient()
         
@@ -70,37 +69,49 @@ class SayPhrases:
         #rospy.sleep(1)
         #self.soundhandle.say("Ready", self.voice)
         
-        if self.random_phrases:  
-            rospy.loginfo("Saying random phrases...")
-        else:
-            # Create a service to accept location requests
+        if not self.random_phrases:
+            # Create a service to accept speech requests
             rospy.Service('~say_phrase', SayPhrase, self.SayPhraseHandler)
-            
             rospy.loginfo("Waiting for signal to say something...")
+            rospy.spin()
+        else:
+            rospy.loginfo("Saying random phrases...")
+            
+            while not rospy.is_shutdown():
+                phrases = sample(self.phrases, len(self.phrases))
+                
+                for phrase in phrases:
+                    if self.use_tts:
+                        self.soundhandle.say(str(phrase['phrase']), self.voice)
+                    else:
+                        if phrase['file'] is not None:
+                            self.soundhandle.playWave(self.wavepath + '/' + phrase['file'])
+                       
+                    rospy.sleep(randint(2, 10))
+
         
     def SayPhraseHandler(self, req):
-        id = req.data
+        id = req.id.data
         
         rospy.loginfo(id)
             
-#         if id > len(self.phrases) - 1:
-#             return
-        
-        rospy.loginfo(self.phrases)
-        
+        if id > len(self.phrases) - 1:
+            rospy.loginfo("Phrase ID out of bounds. Max possible value is " + str(len(self.phrases)))
+            return
+                
         [phrase] = [phrase['phrase'] for phrase in self.phrases if phrase['id'] == id]
         
         rospy.loginfo(phrase)
         
         self.soundhandle.say(str(phrase), self.voice)
+        
+        return SayPhraseResponse()
 
     def cleanup(self):
-        self.soundhandle.stopAll()
-        rospy.loginfo("Shutting down talkback node...")
+        rospy.loginfo("Shutting down say phrases node...")
 
 if __name__=="__main__":
     try:
         SayPhrases(sys.path[0])
-        rospy.spin()
     except rospy.ROSInterruptException:
         rospy.loginfo("Say phrases node terminated.")

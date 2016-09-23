@@ -5,9 +5,8 @@
   <node  pkg="jr_speech" type="say_phrases.py" name="say_phrases" output="screen">
     <param name="config_file" value="$(find jr_speech)/config/phrases/3DV_demo/phrases.yaml" />
     <param name="use_tts" value="true" />
-    <param name="random_phrases" value="false" />
+    <param name="random_phrases" value="true" />
     <param name="wavepath" value="$(find jr_speech)/wave_files" />
-
   </node>
   
 </launch>
