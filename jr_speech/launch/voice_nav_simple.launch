@@ -1,0 +1,18 @@
+<launch>
+
+  <arg name="sim" default="false" />
+
+  <node pkg="jr_speech" name="voice_nav_simple" type="voice_nav_simple.py" output="screen">
+    <remap from="cmd_vel" to="/sibot/navigation/cmd_vel"   unless="$(arg sim)" />
+    <remap from="cmd_vel" to="/segway/navigation/cmd_vel"      if="$(arg sim)" />
+    <rosparam>
+       scale_linear:      0.5
+       scale_angular:     1.5
+       max_speed:         1.0
+       start_speed:       0.1
+       linear_increment:  0.05
+       angular_increment: 0.4
+    </rosparam>
+  </node>
+  
+</launch>
