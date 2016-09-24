@@ -22,7 +22,7 @@
 """
 
 import rospy
-import sys
+import sys, os
 from jr_msgs.srv import SayPhrase, SayPhraseResponse
 from sound_play.libsoundplay import SoundClient
 from yaml import load
@@ -30,12 +30,12 @@ from random import sample, randint
 
 class SayPhrases:
     def __init__(self, script_path):
-        rospy.init_node('say_phrases')
+        rospy.init_node("say_phrases")
 
         rospy.on_shutdown(self.cleanup)
         
         # Get the path of the configuration file
-        config_file = rospy.get_param('~config_file', None)
+        config_file = rospy.get_param("~config_file", None)
         
         # Use text-to-speech or play wave files?
         self.use_tts = rospy.get_param("~use_tts", True)
@@ -66,12 +66,13 @@ class SayPhrases:
         
         # Announce that we are ready for input
         self.soundhandle.playWave(self.wavepath + "/R2D2a.wav")
-        #rospy.sleep(1)
-        #self.soundhandle.say("Ready", self.voice)
+        rospy.sleep(1)
+        self.soundhandle.say("Ready", self.voice)
+        rospy.sleep(2)
         
         if not self.random_phrases:
             # Create a service to accept speech requests
-            rospy.Service('~say_phrase', SayPhrase, self.SayPhraseHandler)
+            rospy.Service("~say_phrase", SayPhrase, self.SayPhraseHandler)
             rospy.loginfo("Waiting for signal to say something...")
             rospy.spin()
         else:
@@ -86,9 +87,10 @@ class SayPhrases:
                     else:
                         if phrase['file'] is not None:
                             self.soundhandle.playWave(self.wavepath + '/' + phrase['file'])
+                        else:
+                            self.soundhandle.say(str(phrase['phrase']), self.voice)
                        
                     rospy.sleep(randint(2, 10))
-
         
     def SayPhraseHandler(self, req):
         id = req.id.data
@@ -108,6 +110,11 @@ class SayPhrases:
         return SayPhraseResponse()
 
     def cleanup(self):
+        try:
+            self.soundhandle.stopAll()
+            os._exit(0)
+        except:
+            pass
         rospy.loginfo("Shutting down say phrases node...")
 
 if __name__=="__main__":

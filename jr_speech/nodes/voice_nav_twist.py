@@ -41,10 +41,10 @@ class VoiceNav:
         self.cmd_vel = Twist()
 
         # Publish the Twist message to the cmd_vel topic
-        self.cmd_vel_pub = rospy.Publisher('cmd_vel', Twist, queue_size=5)
+        self.cmd_vel_pub = rospy.Publisher("cmd_vel", Twist, queue_size=5)
         
         # Subscribe to the /recognizer/output topic to receive voice commands.
-        rospy.Subscriber('/recognizer/output', String, self.speech_callback)
+        rospy.Subscriber("/recognizer/output", String, self.speech_callback)
         
         # A mapping from keywords or phrases to commands
         self.keywords_to_command = {'stop': ['stop', 'halt', 'abort', 'kill', 'panic', 'off', 'freeze', 'shut down', 'turn off', 'help', 'help me'],

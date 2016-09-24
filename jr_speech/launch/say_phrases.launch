@@ -1,11 +1,14 @@
 <launch>
 
+  <arg name="use_tts" default="true" />
+  <arg name="random_phrases" default="true" />
+  
   <node name="soundplay_node" pkg="sound_play" type="soundplay_node.py" output="screen"/>
 
   <node  pkg="jr_speech" type="say_phrases.py" name="say_phrases" output="screen">
-    <param name="config_file" value="$(find jr_speech)/config/phrases/3DV_demo/phrases.yaml" />
-    <param name="use_tts" value="true" />
-    <param name="random_phrases" value="true" />
+    <param name="config_file" value="$(find jr_speech)/config/phrases_3DV.yaml" />
+    <param name="use_tts" value="$(arg use_tts)" />
+    <param name="random_phrases" value="$(arg random_phrases)" />
     <param name="wavepath" value="$(find jr_speech)/wave_files" />
   </node>
   
