@@ -101,12 +101,16 @@ class SayPhrases:
             rospy.loginfo("Phrase ID out of bounds. Max possible value is " + str(len(self.phrases)))
             return
                 
-        [phrase] = [phrase['phrase'] for phrase in self.phrases if phrase['id'] == id]
+        [phrase] = [phrase for phrase in self.phrases if phrase['id'] == id]
         
-        rospy.loginfo(phrase)
-        
-        self.soundhandle.say(str(phrase), self.voice)
-        
+        if self.use_tts:
+            self.soundhandle.say(phrase['phrase'], self.voice)
+        else:
+            if phrase['file'] is not None:
+                self.soundhandle.playWave(self.wavepath + '/' + phrase['file'])
+            else:
+                self.soundhandle.say(str(phrase['phrase']), self.voice)
+                
         return SayPhraseResponse()
 
     def cleanup(self):

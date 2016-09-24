@@ -9,8 +9,8 @@
   file: do_you_have_the_time_please.wav
 - id: 3
   phrase: I will take you to the poster session.
-  file: 
+  file: i_will_take_you_to_the_poster_session.wav
 - id: 4
   phrase: I will take you to the keynote talks.
-  file: 
+  file: i_will_take_you_to_the_keynote_talks.wav
   
