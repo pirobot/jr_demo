@@ -2,11 +2,12 @@
 
   <arg name="sim" default="false" />
   <arg name="fake" default="false" />
+  <arg name="kobuki" default="false" />
 
   <node pkg="jr_speech" name="voice_nav_twist" type="voice_nav_twist.py" output="screen">
     <remap from="cmd_vel" to="/sibot/navigation/cmd_vel"   unless="$(arg sim)" />
-    <remap from="cmd_vel" to="/segway/navigation/cmd_vel"      if="$(arg sim)" />
-    <remap from="cmd_vel" to="/cmd_vel"      if="$(arg fake)" />
+    <remap from="cmd_vel" to="/segway/navigation/cmd_vel"  if="$(arg sim)" />
+    <remap from="cmd_vel" to="/cmd_vel_mux/input/navi"     if="$(arg kobuki)" />
 
     <rosparam>
        scale_linear:      0.5
