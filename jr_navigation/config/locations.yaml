@@ -1,0 +1,30 @@
+- id: 1
+  name: posters
+  position: [1, -1, 0]
+  orientation: [0, 0, 0, 1]
+  ar_tags: [1, 2, 3]
+- id: 2
+  name: hallway
+  position: [1, 1, 0]
+  orientation: [0, 0, 0, 1]
+  ar_tags: [4,5 6]
+- id: 3
+  name: bathroom
+  position: [-3.470, 4.331, 0.000]
+  orientation: [0.000, 0.000, 0.936, -0.352]
+  ar_tags: [7, 8]
+- id: 4
+  name: food
+  position: [-1, -1, 0]
+  orientation: [0, 0, 0, 1]
+  ar_tags: [9, 10]
+- id: 5
+  name: keynote
+  position: [-1.5, 0.5, 0]
+  orientation: [0, 0, 0, 1]
+  ar_tags: [11, 12, 13]
+- id: 6
+  name: talks
+  position: [0.5, -1.5, 0]
+  orientation: [0, 0, 0, 1]
+  ar_tags: [14, 15, 16]
