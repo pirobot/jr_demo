@@ -56,7 +56,7 @@ class SayPhrases:
             self.phrases = load(config)
                 
         # Create the sound client object
-        self.soundhandle = SoundClient()
+        self.soundhandle = SoundClient(blocking=True)
         
         # Wait a moment to let the client connect to the sound_play server
         rospy.sleep(1)

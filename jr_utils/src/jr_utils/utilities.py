@@ -67,7 +67,7 @@ def create_location_markers(marker_scale=0.2, frame_id='map', locations=None, sh
             label_marker.id = 100 + int(location_marker.id)
             label_marker.type = Marker.TEXT_VIEW_FACING
             label_marker.scale.z = marker_scale
-            label_marker.pose.position.x = location_marker.pose.position.x + 0.5
+            label_marker.pose.position.x = location_marker.pose.position.x + 0.2
         
             location_markers.markers.append(label_marker)
                 

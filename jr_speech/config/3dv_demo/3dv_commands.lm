@@ -1,0 +1,63 @@
+Language model created by QuickLM on Mon Oct 17 18:14:25 EDT 2016
+Copyright (c) 1996-2010 Carnegie Mellon University and Alexander I. Rudnicky
+
+The model is in standard ARPA format, designed by Doug Paul while he was at MITRE.
+
+The code that was used to produce this language model is available in Open Source.
+Please visit http://www.speech.cs.cmu.edu/tools/ for more information
+
+The (fixed) discount mass is 0.5. The backoffs are computed using the ratio method.
+This model based on a corpus of 8 sentences and 12 words
+
+\data\
+ngram 1=12
+ngram 2=18
+ngram 3=10
+
+\1-grams:
+-0.8129 </s> -0.3010
+-0.8129 <s> -0.2285
+-1.7160 BATHROOM -0.2285
+-1.7160 FOOD -0.2285
+-1.7160 KEYNOTE -0.2926
+-1.7160 KEYNOTES -0.2285
+-1.7160 POSTER -0.2926
+-1.7160 POSTERS -0.2285
+-1.7160 RESTROOM -0.2285
+-1.7160 SESSION -0.2285
+-1.7160 SESSIONS -0.2285
+-1.7160 WASHROOM -0.2285
+
+\2-grams:
+-1.2041 <s> BATHROOM 0.0000
+-1.2041 <s> FOOD 0.0000
+-1.2041 <s> KEYNOTE 0.0000
+-1.2041 <s> KEYNOTES 0.0000
+-1.2041 <s> POSTER 0.0000
+-1.2041 <s> POSTERS 0.0000
+-1.2041 <s> RESTROOM 0.0000
+-1.2041 <s> WASHROOM 0.0000
+-0.3010 BATHROOM </s> -0.3010
+-0.3010 FOOD </s> -0.3010
+-0.3010 KEYNOTE SESSIONS 0.0000
+-0.3010 KEYNOTES </s> -0.3010
+-0.3010 POSTER SESSION 0.0000
+-0.3010 POSTERS </s> -0.3010
+-0.3010 RESTROOM </s> -0.3010
+-0.3010 SESSION </s> -0.3010
+-0.3010 SESSIONS </s> -0.3010
+-0.3010 WASHROOM </s> -0.3010
+
+\3-grams:
+-0.3010 <s> BATHROOM </s>
+-0.3010 <s> FOOD </s>
+-0.3010 <s> KEYNOTE SESSIONS
+-0.3010 <s> KEYNOTES </s>
+-0.3010 <s> POSTER SESSION
+-0.3010 <s> POSTERS </s>
+-0.3010 <s> RESTROOM </s>
+-0.3010 <s> WASHROOM </s>
+-0.3010 KEYNOTE SESSIONS </s>
+-0.3010 POSTER SESSION </s>
+
+\end\

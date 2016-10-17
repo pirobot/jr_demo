@@ -13,4 +13,27 @@
 - id: 4
   phrase: I will take you to the keynote talks.
   file: i_will_take_you_to_the_keynote_talks.wav
-  
+- id: 5
+  phrase: Thank you for coming to the conference.
+  file:
+- id: 6
+  phrase: I will take you there now.
+  file:
+- id: 7
+  phrase: Please follow me.
+  file:
+- id: 8
+  phrase: Excuse me.
+  file:
+- id: 9
+  phrase: I need to get by.
+  file:
+- id: 10
+  phrase: Thank you.
+  file:
+- id: 11
+  phrase: My battery is getting low.
+  file:
+- id: 12
+  phrase: I am lost.
+  file:
