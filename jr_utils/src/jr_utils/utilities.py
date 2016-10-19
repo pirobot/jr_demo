@@ -25,7 +25,7 @@ import rospy
 from visualization_msgs.msg import Marker, MarkerArray
 from copy import deepcopy
 
-def create_location_markers(marker_scale=0.2, frame_id='map', locations=None, show_labels=True):
+def create_location_markers(marker_scale=0.5, frame_id='map', locations=None, show_labels=True):
     # Define a marker publisher.
     location_marker_pub = rospy.Publisher('location_markers', MarkerArray, queue_size=5)
     
@@ -67,7 +67,9 @@ def create_location_markers(marker_scale=0.2, frame_id='map', locations=None, sh
             label_marker.id = 100 + int(location_marker.id)
             label_marker.type = Marker.TEXT_VIEW_FACING
             label_marker.scale.z = marker_scale
-            label_marker.pose.position.x = location_marker.pose.position.x + 0.2
+            label_marker.pose.position.x = location_marker.pose.position.x + 1.2
+            label_marker.pose.position.y = location_marker.pose.position.y + 0.5
+
         
             location_markers.markers.append(label_marker)
                 

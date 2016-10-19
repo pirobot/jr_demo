@@ -1,0 +1,7 @@
+image: alumni_center_2016-10-17_0.1_resolution.pgm
+resolution: 0.1
+origin: [-71.600000, -28.400000, 0.000000]
+negate: 0
+occupied_thresh: 0.65
+free_thresh: 0.196
+

@@ -109,82 +109,9 @@ class NavServer():
         rospy.Service('/goto_location', GotoLocation, self.GotoLocationHandler)
         
         rospy.loginfo("Ready to accept navigation requests.")
-
-# #         # Initialize a number of parameters and variables
-# #         setup_task_environment(self)
-#  
-#         # Create a list to hold the move_base tasks
-#         MOVE_BASE_TASKS = list()
-#          
-#         n_locations = len(self.locations)
-#          
-#         # Create simple action navigation task for each location
-#         for i in range(n_locations):
-#             goal = MoveBaseGoal()
-#             goal.target_pose.header.frame_id = self.locations[i]['frame_id']
-#             goal.target_pose.header.stamp = rospy.Time.now()
-#             goal.target_pose.pose = self.locations[i]['pose']
-#              
-#             move_base_task = SimpleActionTask("MOVE_BASE_TASK_" + str(i), "move_base", MoveBaseAction, goal, reset_after=False)
-#              
-#             MOVE_BASE_TASKS.append(move_base_task)
-
-#         
-#         # Set the docking station pose
-#         goal = MoveBaseGoal()
-#         goal.target_pose.header.frame_id = 'map'
-#         goal.target_pose.header.stamp = rospy.Time.now()
-#         goal.target_pose.pose = self.docking_station_pose
-#         
-#         # Assign the docking station pose to a move_base action task
-#         NAV_DOCK_TASK = SimpleActionTask("NAV_DOC_TASK", "move_base", MoveBaseAction, goal, reset_after=False)
-#         
-#         # Create the root node
-#         BEHAVE = Sequence("BEHAVE")
-#          
-#         # Create the "stay healthy" selector
-#         #STAY_HEALTHY = Selector("STAY_HEALTHY")
-
-#          
-#         # Add the two subtrees to the root node in order of priority
-#         #BEHAVE.add_child(STAY_HEALTHY)
-#          
-#         # Create the patrol iterator
-#         PATROL = Iterator("PATROL")
-#          
-#         IGNORE_FAILURE = IgnoreFailure("IGNORE_FAILURE")
-#          
-#         IGNORE_FAILURE.add_child(PATROL)
-#          
-#         # Add the move_base tasks to the patrol task
-#         for task in MOVE_BASE_TASKS:
-#             PATROL.add_child(task)
-#    
-#         # Add the patrol to the loop decorator
-#         LOOP_PATROL.add_child(PATROL)
-         
-#         # Add the battery check and recharge tasks to the "stay healthy" task
-#         with STAY_HEALTHY:
-#             # The check battery condition (uses MonitorTask)
-#             CHECK_BATTERY = MonitorTask("CHECK_BATTERY", "battery_level", Float32, self.check_battery)
-#             
-#             # The charge robot task (uses ServiceTask)
-#             CHARGE_ROBOT = ServiceTask("CHARGE_ROBOT", "battery_simulator/set_battery_level", SetBatteryLevel, 100, result_cb=self.recharge_cb)
-#       
-#             # Build the recharge sequence using inline construction
-#             RECHARGE = Sequence("RECHARGE", [NAV_DOCK_TASK, CHARGE_ROBOT])
-#                 
-#             # Add the check battery and recharge tasks to the stay healthy selector
-#             STAY_HEALTHY.add_child(CHECK_BATTERY)
-#             STAY_HEALTHY.add_child(RECHARGE)
-                 
-        # Display the tree before beginning execution
-        #print "Patrol Behavior Tree"
-        #print_tree(BEHAVE, use_symbols=True)
          
         # Run the tree
         while not rospy.is_shutdown():
-            #BEHAVE.run()
             location_marker_pub.publish(location_markers)
             rospy.sleep(0.1)
             
@@ -262,18 +189,6 @@ class NavServer():
     def amcl_callback(self, msg):
         self.robot_pose = msg.pose
             
-    def check_battery(self, msg):
-        if msg.data is None:
-            return TaskStatus.RUNNING
-        else:
-            if msg.data < self.low_battery_threshold:
-                rospy.loginfo("LOW BATTERY - level: " + str(int(msg.data)))
-                return TaskStatus.FAILURE
-            else:
-                return TaskStatus.SUCCESS
-    
-    def recharge_cb(self, result):
-        rospy.loginfo("BATTERY CHARGED!")
             
     def shutdown(self):
         rospy.loginfo("Stopping the robot...")

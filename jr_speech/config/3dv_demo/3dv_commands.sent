@@ -2,7 +2,39 @@
 <s> POSTER SESSION </s>
 <s> KEYNOTES </s>
 <s> KEYNOTE SESSIONS </s>
+<s> DEMOS </s>
+<s> DEMO </s>
+<s> DEMONSTRATION </s>
+<s> DEMONSTRATIONS </s>
+<s> EXHIBIT </s>
+<s> EXHIBITS </s>
+<s> TUTORIAL </s>
+<s> TUTORIALS </s>
 <s> BATHROOM </s>
+<s> BATHROOMS </s>
+<s> MENS BATHROOM </s>
+<s> WOMENS BATHROOM </s>
 <s> WASHROOM </s>
+<s> WASHROOMS </s>
+<s> MENS WASHROOM </s>
+<s> WOMENS WASHROOM </s>
 <s> RESTROOM </s>
+<s> RESTROOMS </s>
+<s> MENS RESTROOM </s>
+<s> WOMENS RESTROOM </s>
 <s> FOOD </s>
+<s> FOOD AREA </s>
+<s> SOMETHING TO EAT </s>
+<s> CAFETERIA </s>
+<s> ENTRANCE </s>
+<s> EXIT </s>
+<s> FOYER </s>
+<s> HEY JR </s>
+<s> HI JR </s>
+<s> HELLO JR </s>
+<s> HI JACKRABBOT </s>
+<s> HI JACKRABBIT </s>
+<s> HEY JACKRABBOT </s>
+<s> HEY JACKRABBIT </s>
+<s> HELLO JACKRABBOT </s>
+<s> HELLO JACKRABBIT </s>

@@ -1,10 +1,13 @@
 <launch>
 
   <arg name="sibot" default="true" />
+  <arg name="fake" default="false" />
 
   <node pkg="jr_navigation" type="jr_nav_server.py" name="jr_nav_server" clear_params="true" output="screen">
      <remap from="move_base" to="move_base_navi" if="$(arg sibot)" />
-     <param name="nav_config_file" value="$(find jr_navigation)/config/locations.yaml" />
+     <remap from="move_base" to="move_base" if="$(arg fake)" />
+
+     <param name="nav_config_file" value="$(find jr_navigation)/config/3dv/locations.yaml" />
      <param name="robot_ave_speed" value="0.05" />
   </node>
    

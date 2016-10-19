@@ -1,8 +1,9 @@
 <launch>
 
-  <node name="recognizer" pkg="pocketsphinx" type="recognizer.py" output="screen">
+  <node name="recognizer" pkg="pocketsphinx" type="recognizer.py" output="screen" clear_params="true">
     <param name="lm" value="$(find jr_speech)/config/voice_nav/nav_commands.lm"/>
     <param name="dict" value="$(find jr_speech)/config/voice_nav/nav_commands.dic"/>
+    <!-- param name="mic_name" value="alsa_input.usb-KYE_Systems_Corp._USB_Camera_200901010001-02-USBCamera.analog-stereo" / -->
   </node>
   
 </launch>

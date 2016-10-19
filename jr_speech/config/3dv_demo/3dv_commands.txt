@@ -2,7 +2,40 @@ posters
 poster session
 keynotes
 keynote sessions
+demos
+demo
+demonstration
+demonstrations
+exhibit
+exhibits
+tutorial
+tutorials
 bathroom
+bathrooms
+mens bathroom
+womens bathroom
 washroom
+washrooms
+mens washroom
+womens washroom
 restroom
+restrooms
+mens restroom
+womens restroom
 food
+food area
+something to eat
+cafeteria
+entrance
+exit
+foyer
+hey jr
+hi jr
+hello jr
+hi jackrabbot
+hi jackrabbit
+hey jackrabbot
+hey jackrabbit
+hello jackrabbot
+hello jackrabbit
+
