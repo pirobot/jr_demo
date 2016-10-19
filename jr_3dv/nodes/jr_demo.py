@@ -85,6 +85,9 @@ class JRDemo():
 #         self.soundhandle.stopAll()     
 #         rospy.sleep(1)
 
+        # Publish the goal location as determined through speech
+        self.location_pub = rospy.Publisher('/speech_location', String)
+
         # Connect to the goto_location service
         rospy.wait_for_service('/goto_location', 60)
  
@@ -104,7 +107,7 @@ class JRDemo():
         
         # Announce that we are ready for input
         self.soundhandle.say("Ready", self.tts_voice)
-        self.soundhandle.say("Say, hi jack rabbit, to get my attention", self.tts_voice)
+        self.soundhandle.say("Say, hello jack rabbit, to get my attention", self.tts_voice)
         
         while not rospy.is_shutdown():
             # If we have lost the target, start a timer
@@ -150,9 +153,7 @@ class JRDemo():
             self.listening = True
                 
     def speech_recognition(self, msg):
-        # Turn off speech recognition while we are talking
-        #self.stop_speech_recognition()
-        
+        # Look for a wake up phrase
         if msg.data in ['hey jr', 'hi jr', 'hey jackrabbot', 'hi jackrabbot', 'hey jackrabbit', 'hi jackrabbit', 'hello jackrabbot', 'hello jackrabbit']:
             self.listening = True
             self.soundhandle.say("Hello there. How can I help?", self.tts_voice)
@@ -215,19 +216,25 @@ class JRDemo():
         
         self.soundhandle.say(response, self.tts_voice)
         
+        # Publish the location
+        location_as_string = String()
+        location_as_string.data = location
+        
+        self.location_pub.publish(location_as_string)
+        
+        # Create a goto request if using the goto_service
         request = GotoLocationRequest()
         request.location.name = location
  
         response = self.goto_service(request)
         
-        rospy.loginfo("Waiting for result from navigation attempt...")
+        rospy.loginfo("Waiting for result from navigation request...")
         rospy.loginfo(response)
         
+        if response.success:
+            self.soundhandle.say("We have arrived.", self.tts_voice)
+        
         self.listening = False
-
-        # Turn speech recognition back on
-        #self.start_speech_recognition()
-
             
     def shutdown(self):
         rospy.sleep(1)

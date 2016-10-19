@@ -2,6 +2,7 @@ posters
 poster session
 keynotes
 keynote sessions
+keynote talks
 demos
 demo
 demonstration

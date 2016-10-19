@@ -14,7 +14,7 @@
     <param name="lm" value="$(find jr_speech)/config/3dv_demo/3dv_commands.lm"/>
     <param name="dict" value="$(find jr_speech)/config/3dv_demo/3dv_commands.dic"/>
     <!-- Use the command 'pacmd list-sources | grep alsa_input' to get microphone names -->
-    <param name="mic_name" value="alsa_input.usb-Plantronics_Plantronics_BT300M_263993CCC7D14F6787021589130D6328-00-BT300M.analog-mono" />
+    <!--param name="mic_name" value="alsa_input.usb-Plantronics_Plantronics_BT300M_263993CCC7D14F6787021589130D6328-00-BT300M.analog-mono" /-->
   </node>
 
   <node pkg="jr_3dv" type="jr_demo.py" name="jr_demo" clear_params="true" output="screen">
