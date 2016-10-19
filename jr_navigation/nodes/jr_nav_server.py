@@ -28,7 +28,7 @@ from actionlib import GoalStatus
 from move_base_msgs.msg import MoveBaseAction, MoveBaseGoal, MoveBaseActionFeedback
 from std_msgs.msg import Float32
 from geometry_msgs.msg import Twist, Pose, PoseStamped, PoseWithCovarianceStamped
-from pi_trees_ros.pi_trees_ros import *
+#from pi_trees_ros.pi_trees_ros import *
 from jr_utils.utilities import create_location_markers
 from jr_msgs.msg import Location
 from jr_msgs.srv import GotoLocation, GotoLocationResponse, GotoLocationRequest
