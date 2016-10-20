@@ -9,7 +9,7 @@
   <node name="map_server" pkg="map_server" type="map_server" args="$(find jr_navigation)/maps/$(arg map)"/>
 
   <!-- The move_base node -->
-  <include file="$(find jr_navigation)/launch/fake_move_base_amcl.launch" />
+  <include file="$(find jr_navigation)/launch/fake_turtlebot_move_base_amcl.launch" />
   
   <!-- Run fake localization compatible with AMCL output -->
   <node pkg="fake_localization" type="fake_localization" name="fake_localization" clear_params="true" output="screen">

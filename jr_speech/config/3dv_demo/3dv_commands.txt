@@ -1,16 +1,22 @@
 posters
 poster session
+poster area
 keynotes
+keynote
 keynote sessions
+keynote session
 keynote talks
-demos
+keynote talk
 demo
+demos
 demonstration
 demonstrations
 exhibit
 exhibits
+exhibit area
 tutorial
 tutorials
+tutorial session
 bathroom
 bathrooms
 mens bathroom
@@ -25,6 +31,8 @@ mens restroom
 womens restroom
 food
 food area
+food truck
+food trucks
 something to eat
 cafeteria
 entrance

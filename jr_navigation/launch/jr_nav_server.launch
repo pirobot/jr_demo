@@ -8,7 +8,7 @@
      <remap from="move_base" to="move_base" if="$(arg fake)" />
 
      <param name="nav_config_file" value="$(find jr_navigation)/config/3dv/locations.yaml" />
-     <param name="robot_ave_speed" value="0.2" />
+     <param name="robot_ave_speed" value="0.1" />
   </node>
    
 </launch>

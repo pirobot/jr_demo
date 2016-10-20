@@ -1,16 +1,22 @@
 <s> POSTERS </s>
 <s> POSTER SESSION </s>
+<s> POSTER AREA </s>
 <s> KEYNOTES </s>
+<s> KEYNOTE </s>
 <s> KEYNOTE SESSIONS </s>
+<s> KEYNOTE SESSION </s>
 <s> KEYNOTE TALKS </s>
-<s> DEMOS </s>
+<s> KEYNOTE TALK </s>
 <s> DEMO </s>
+<s> DEMOS </s>
 <s> DEMONSTRATION </s>
 <s> DEMONSTRATIONS </s>
 <s> EXHIBIT </s>
 <s> EXHIBITS </s>
+<s> EXHIBIT AREA </s>
 <s> TUTORIAL </s>
 <s> TUTORIALS </s>
+<s> TUTORIAL SESSION </s>
 <s> BATHROOM </s>
 <s> BATHROOMS </s>
 <s> MENS BATHROOM </s>
@@ -25,6 +31,8 @@
 <s> WOMENS RESTROOM </s>
 <s> FOOD </s>
 <s> FOOD AREA </s>
+<s> FOOD TRUCK </s>
+<s> FOOD TRUCKS </s>
 <s> SOMETHING TO EAT </s>
 <s> CAFETERIA </s>
 <s> ENTRANCE </s>

@@ -146,7 +146,7 @@ class NavServer():
 
         distance_to_goal = sqrt((robot_x - goal_x) * (robot_x - goal_x) + (robot_y - goal_y) * (robot_y - goal_y))
         
-        eta = distance_to_goal / self.robot_ave_speed
+        eta = 1.5 * distance_to_goal / self.robot_ave_speed + 60
         
         if eta > 60:
             rospy.loginfo("Allowing " + str(round(eta/60.0, 1)) + " minutes to go " + str(round(distance_to_goal, 1)) + " meters...")

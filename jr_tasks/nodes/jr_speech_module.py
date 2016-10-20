@@ -1,9 +1,10 @@
 #!/usr/bin/env python
 
 """
-    jr_demo.py - Version 1.0 2016-09-10
+    jr_speech_module.py - Version 1.0 2016-09-10
     
-    Look for people and offer to usher them to specific locations within a conference hall.
+    Look for people published on the people detection topic and offer to usher them
+    to specific locations within a conference hall.
     
     Created for the Pi Robot Project: http://www.pirobot.org
     Copyright (c) 2016 Patrick Goebel.  All rights reserved.
@@ -34,9 +35,9 @@ from yaml import load
 from math import sqrt
 import random
 
-class JRDemo():
+class SpeechModule():
     def __init__(self):
-        rospy.init_node("jr_demo")
+        rospy.init_node("jr_speech_module")
         
         # Set the shutdown function
         rospy.on_shutdown(self.shutdown)
@@ -81,22 +82,11 @@ class JRDemo():
         
         # Wait a moment to let the client connect to the sound_play server
         rospy.sleep(2)
-        
-        # Make sure any lingering sound_play processes are stopped.
-#         self.soundhandle.stopAll()     
-#         rospy.sleep(1)
-
-        # Publish the goal location as determined through speech
-        self.location_pub = rospy.Publisher('/speech_location', String)
 
         # Connect to the goto_location service
         rospy.wait_for_service('/goto_location', 60)
  
         self.goto_service = rospy.ServiceProxy('/goto_location', GotoLocation)
-
-        # Connect to the start/stop services for speech recognition
-        self.stop_speech_recognition = rospy.ServiceProxy('/recognizer/stop', Empty)
-        self.start_speech_recognition = rospy.ServiceProxy('/recognizer/start', Empty)
 
         # Subscribe to the speech recognition /recognizer/output topic to receive voice commands
         rospy.Subscriber("/recognizer/output", String, self.speech_recognition)
@@ -104,11 +94,21 @@ class JRDemo():
         # Subscribe to the target topic for tracking people
         rospy.Subscriber('target_topic', DetectionArray, self.detect_person, queue_size=1)
         
+        # Wait for the speech recognition services to be ready
+        rospy.wait_for_service('/recognizer/start', 15)
+        rospy.wait_for_service('/recognizer/stop', 15)
+        
+        # Connect to the start/stop services for speech recognition
+        self.stop_speech_recognition = rospy.ServiceProxy('/recognizer/stop', Empty)
+        self.start_speech_recognition = rospy.ServiceProxy('/recognizer/start', Empty)
+        
         rospy.loginfo("JR demo up and running.")
         
         # Announce that we are ready for input
         self.soundhandle.say("Ready", self.tts_voice)
         self.soundhandle.say("Say, hello jack rabbit, to get my attention", self.tts_voice)
+        
+        self.start_speech_recognition()
         
         while not rospy.is_shutdown():
             # If we have lost the target, start a timer
@@ -157,31 +157,29 @@ class JRDemo():
         # Look for a wake up phrase
         if msg.data in ['hey jr', 'hi jr', 'hey jackrabbot', 'hi jackrabbot', 'hey jackrabbit', 'hi jackrabbit', 'hello jackrabbot', 'hello jackrabbit']:
             self.listening = True
-            self.soundhandle.say("Hello there. How can I help?", self.tts_voice)
+            self.soundhandle.say("Hello there. Where would you like to go?", self.tts_voice)
             return
 
         if not self.listening:
             return
         
-        if msg.data in ['poster session', 'poster sessions', 'poster', 'posters']:
+        if msg.data in ['poster session', 'poster sessions', 'poster', 'posters', 'poster area']:
             location = "posters"
         elif msg.data in ['keynote session', 'keynote sessions', 'keynote talk', 'keynote talks', 'keynote', 'keynotes']:
             location = "keynotes"
         elif msg.data in ['demo', 'demos', 'demonstration', 'demonstrations']:
             location = "demos"
-        elif msg.data in ['tutorial', 'tutorials']:
+        elif msg.data in ['tutorial', 'tutorials', 'tutorial session']:
             location = "tutorials"
-        elif msg.data in ['exhibit', 'exhibits']:
+        elif msg.data in ['exhibit', 'exhibits', 'exhibit area']:
             location = "exhibits"
-#         elif msg.data in ['mens washroom', 'mens restroom', 'mens bathroom']:
-#             location = "mens restroom"
-#         elif msg.data in ['womens washroom', 'womens restroom', 'womens bathroom']:
-#             location = "womens restroom"
         elif msg.data in ['washroom', 'washrooms', 'restroom', 'restrooms', 'bathroom', 'bathrooms', 'mens washroom', 'mens restroom', 'mens bathroom', 'womens washroom', 'womens restroom', 'womens bathroom']:
             location = "restrooms"
-        elif msg.data in ['food', 'food area', 'something to eat', 'cafeteria']:
+        elif msg.data in ['food', 'food area', 'food truck', 'food trucks', 'something to eat', 'cafeteria', 'to trucks', 'to food']:
             location = "food"
-        elif msg.data in ['entrance', 'exit', 'foyer', 'home']:
+        elif msg.data in ['entrance', 'foyer']:
+            location = "entrance"
+        elif msg.data in ['exit']:
             location = "entrance"
         else:
             self.soundhandle.say("I'm sorry. I did not understand that. Please say again?", self.tts_voice)
@@ -199,8 +197,9 @@ class JRDemo():
                               'restrooms':'restrooms',
                               'mens restroom':'mens restroom',
                               'womens restroom':'womens restroom',
-                              'food':'where the food is',
-                              'entrance':'entrance'}
+                              'food':'food trucks',
+                              'entrance':'entrance',
+                              'exit':'exit'}
         
         random.shuffle(self.begin_phrases)
         random.shuffle(self.end_phrases)
@@ -217,19 +216,13 @@ class JRDemo():
         
         self.soundhandle.say(response, self.tts_voice)
         
-        # Publish the location
-        location_as_string = String()
-        location_as_string.data = location
-        
-        self.location_pub.publish(location_as_string)
-        
-        # Create a goto request if using the goto_service
+        # Create a goto request for the navigation server
         request = GotoLocationRequest()
         request.location.name = location
  
         response = self.goto_service(request)
         
-        rospy.loginfo("Waiting for result from navigation request...")
+        rospy.loginfo("Location sent to navigation server...")
         rospy.loginfo(response)
         
         if response.success:
@@ -242,5 +235,5 @@ class JRDemo():
         os._exit(0)
 
 if __name__ == '__main__':
-    tree = JRDemo()
+    SpeechModule()
 
