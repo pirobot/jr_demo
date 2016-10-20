@@ -45,6 +45,7 @@ class JRDemo():
                 
         self.tick = 1.0 / self.rate
         
+        # How close does a person have to be to pay attention to them?
         self.max_target_distance = rospy.get_param('~max_target_distance', 2.0)
         
         # Set the default TTS voice to use

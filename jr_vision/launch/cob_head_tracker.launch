@@ -1,0 +1,6 @@
+<launch>
+
+  <include file="$(find jr_vision)/launch/cob_people_detection.launch" />
+  <include file="$(find jr_vision)/launch/cob_face_recognizer_to_pose.launch" />
+
+</launch>

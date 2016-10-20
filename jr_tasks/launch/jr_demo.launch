@@ -17,7 +17,7 @@
     <!--param name="mic_name" value="alsa_input.usb-Plantronics_Plantronics_BT300M_263993CCC7D14F6787021589130D6328-00-BT300M.analog-mono" /-->
   </node>
 
-  <node pkg="jr_3dv" type="jr_demo.py" name="jr_demo" clear_params="true" output="screen">
+  <node pkg="jr_tasks" type="jr_demo.py" name="jr_demo" clear_params="true" output="screen">
      <remap from="target_topic" to="/face_recognizer/face_recognitions" />
      
      <param name="nav_config_file" value="$(find jr_navigation)/config/3dv/locations.yaml" />
