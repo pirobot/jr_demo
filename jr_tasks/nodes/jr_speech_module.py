@@ -82,6 +82,9 @@ class SpeechModule():
         
         # Wait a moment to let the client connect to the sound_play server
         rospy.sleep(2)
+        
+        # Publish the requested location so the executive node can use it
+        self.location_pub = rospy.Publisher('/speech_navigation', String, queue_size=1)
 
         # Connect to the goto_location service
         #rospy.wait_for_service('/goto_location', 60)
@@ -105,10 +108,10 @@ class SpeechModule():
         rospy.loginfo("JR demo up and running.")
         
         # Announce that we are ready for input
-        self.soundhandle.say("Ready", self.tts_voice)
-        self.soundhandle.say("Say, hello jack rabbit, to get my attention", self.tts_voice)
+        self.jr_says("Ready", self.tts_voice)
+        self.jr_says("Say, hello jack rabbit, to get my attention", self.tts_voice)
         
-        self.start_speech_recognition()
+        #self.start_speech_recognition()
         
         while not rospy.is_shutdown():
             # If we have lost the target, start a timer
@@ -128,6 +131,14 @@ class SpeechModule():
 
             rospy.sleep(self.tick)
             
+    def jr_says(self, text, voice, start_listening=False, pause=2):
+        self.listening = False
+        self.soundhandle.say(text, voice)
+        if start_listening:
+            rospy.sleep(2)
+            self.listening = True
+
+            
     def detect_person(self, msg):
         min_distance = 10000
         target_head = None
@@ -146,19 +157,18 @@ class SpeechModule():
 
     def greet_person(self):
         if not self.greeting_finished:
-            #self.soundhandle.say("Hello there.  My name is Jack Rab bot.", self.tts_voice)
-            #self.soundhandle.say("Thanks for coming to the conference.", self.tts_voice)
-            #self.soundhandle.say("I like what you are wearing.", self.tts_voice)
-            self.soundhandle.say("Where would you like to go?", self.tts_voice)
+            self.jr_says("Hello there.  My name is Jack Rab bot.", self.tts_voice)
+            self.jr_says("Thanks for coming to the conference.", self.tts_voice)
+            self.jr_says("Say, hello jack rabbit, to get my attention", self.tts_voice)
+
+            #self.jr_says("I like what you are wearing.", self.tts_voice)
+            #self.jr_says("Where would you like to go?", self.tts_voice)
             self.greeting_finished = True
-            self.listening = True
                 
     def speech_recognition(self, msg):
         # Look for a wake up phrase
         if msg.data in ['hey jr', 'hi jr', 'hey jackrabbot', 'hi jackrabbot', 'hey jackrabbit', 'hi jackrabbit', 'hello jackrabbot', 'hello jackrabbit']:
-            self.soundhandle.say("Hello there. Where would you like to go?", self.tts_voice)
-            rospy.sleep(2)
-            self.listening = True
+            self.jr_says("Hello there. Where would you like to go?", self.tts_voice, start_listening=True)
             return
 
         if not self.listening:
@@ -183,9 +193,7 @@ class SpeechModule():
         elif msg.data in ['exit']:
             location = "entrance"
         else:
-            self.listening = False
-            self.soundhandle.say("I'm sorry. I did not understand that. Please say again?", self.tts_voice)
-            self.listening = True
+            self.jr_says("I'm sorry. I did not understand that. Please say again?", self.tts_voice)
             return
         
         self.begin_phrases = ['Great choice.', 'No problem.', 'Sure thing.', 'My pleasure.']
@@ -195,7 +203,6 @@ class SpeechModule():
                               'keynotes':'keynote talks',
                               'demos':'demonstrations', 
                               'exhibits':'exhibits',
-                              'demos':'demonstrations',
                               'tutorials':'tutorials',
                               'restrooms':'restrooms',
                               'mens restroom':'mens restroom',
@@ -217,8 +224,12 @@ class SpeechModule():
         
         response = begin + ' I will take you to the ' + location_to_phrase[location] + '. ' + end
         
-        self.listening = False
-        self.soundhandle.say(response, self.tts_voice)
+        self.jr_says(response, self.tts_voice)
+        
+        # Publish the request
+        nav_request = String()
+        nav_request.data = location
+        self.location_pub.publish(nav_request)
         
         # Create a goto request for the navigation server
         #request = GotoLocationRequest()
@@ -226,14 +237,11 @@ class SpeechModule():
  
         #response = self.goto_service(request)
         
-        rospy.loginfo("Navigating to: " + str(location))
+        rospy.loginfo("Speech navigation: " + str(location))
         #rospy.loginfo(response)
         
         #if response.success:
-        #   self.soundhandle.say("We have arrived.", self.tts_voice)
-        
-        rospy.sleep(2)
-        self.listening = False
+        #   self.jr_says("We have arrived.", self.tts_voice)
             
     def shutdown(self):
         rospy.sleep(1)
