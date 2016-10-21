@@ -26,7 +26,7 @@ import rospy
 import os
 import actionlib
 from jr_msgs.msg import Location
-from jr_msgs.srv import GotoLocationRequest, GotoLocationResponse, GotoLocation
+#from jr_msgs.srv import GotoLocationRequest, GotoLocationResponse, GotoLocation
 from cob_perception_msgs.msg import DetectionArray
 from sound_play.libsoundplay import SoundClient
 from std_msgs.msg import String
@@ -84,9 +84,9 @@ class SpeechModule():
         rospy.sleep(2)
 
         # Connect to the goto_location service
-        rospy.wait_for_service('/goto_location', 60)
+        #rospy.wait_for_service('/goto_location', 60)
  
-        self.goto_service = rospy.ServiceProxy('/goto_location', GotoLocation)
+        #self.goto_service = rospy.ServiceProxy('/goto_location', GotoLocation)
 
         # Subscribe to the speech recognition /recognizer/output topic to receive voice commands
         rospy.Subscriber("/recognizer/output", String, self.speech_recognition)
@@ -217,16 +217,16 @@ class SpeechModule():
         self.soundhandle.say(response, self.tts_voice)
         
         # Create a goto request for the navigation server
-        request = GotoLocationRequest()
-        request.location.name = location
+        #request = GotoLocationRequest()
+        #request.location.name = location
  
-        response = self.goto_service(request)
+        #response = self.goto_service(request)
         
-        rospy.loginfo("Location sent to navigation server...")
-        rospy.loginfo(response)
+        rospy.loginfo("Navigating to: " + str(location))
+        #rospy.loginfo(response)
         
-        if response.success:
-            self.soundhandle.say("We have arrived.", self.tts_voice)
+        #if response.success:
+        #   self.soundhandle.say("We have arrived.", self.tts_voice)
         
         self.listening = False
             
