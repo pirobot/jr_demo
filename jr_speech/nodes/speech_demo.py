@@ -111,7 +111,7 @@ class SpeechModule():
         self.jr_says("Ready", self.tts_voice)
         self.jr_says("Say, hello jack rabbit, to get my attention", self.tts_voice)
         
-        #self.start_speech_recognition()
+        self.start_speech_recognition()
         
         while not rospy.is_shutdown():
             # If we have lost the target, start a timer
@@ -237,7 +237,7 @@ class SpeechModule():
  
         #response = self.goto_service(request)
         
-        rospy.loginfo("Speech navigation: " + str(location))
+        rospy.loginfo("Speech command: " + str(location))
         #rospy.loginfo(response)
         
         #if response.success:
