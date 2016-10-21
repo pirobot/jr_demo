@@ -84,7 +84,7 @@ class SpeechModule():
         rospy.sleep(2)
         
         # Publish the requested location so the executive node can use it
-        self.location_pub = rospy.Publisher('/speech_navigation', String, queue_size=1)
+        self.location_pub = rospy.Publisher('/speech_command', String, queue_size=1)
 
         # Connect to the goto_location service
         #rospy.wait_for_service('/goto_location', 60)
