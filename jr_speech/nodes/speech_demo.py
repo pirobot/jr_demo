@@ -55,12 +55,19 @@ class SpeechModule():
         # How long in seconds before we consider a detection lost?
         self.lost_detection_timeout = rospy.get_param('~lost_detection_timeout', 5.0)
         
-        # Get the path of the navigation configuration file
-        nav_config_file = rospy.get_param('~nav_config_file', 'config/locations.yaml')
+        # Get the path of the file listing valid locations
+        nav_config_file = rospy.get_param('~nav_config_file', 'config/3dv/locations.yaml')
+        
+        # Get the Pocketsphinx vocabulary so we can filter recognition results
+        allowed_phrases = rospy.get_param('~allowed_phrases', 'config/3dv_demo/3dv_commands.txt')
         
         # Load the location data
         with open(nav_config_file, 'r') as config:
             self.locations = load(config)
+        
+        # Read in the file
+        with open(allowed_phrases, 'r') as phrases:
+            self.allowed_phrases = [line.strip() for line in phrases if line is not None]
         
         # Have we said the greeting to a new person?
         self.greeting_finished = False
@@ -108,36 +115,37 @@ class SpeechModule():
         rospy.loginfo("JR demo up and running.")
         
         # Announce that we are ready for input
-        self.jr_says("Ready", self.tts_voice)
-        self.jr_says("Say, hello jack rabbit, to get my attention", self.tts_voice)
+        self.jr_says("Ready", self.tts_voice, start_listening=True)
+        #self.jr_says("Say, hello jack rabbit, to get my attention", self.tts_voice, start_listening=True)
         
-        self.start_speech_recognition()
+        #self.start_speech_recognition()
         
         while not rospy.is_shutdown():
-            # If we have lost the target, start a timer
-            if not self.target_visible:
-                self.target_lost_time += self.tick
-                
-                if self.target_lost_time > self.lost_detection_timeout and not self.waiting:
-                    rospy.loginfo("No person in sight.")
-                    self.target_visible = False
-                    self.greeting_finished = False
-                    self.waiting = True
-            else:
-                if self.waiting:
-                    rospy.loginfo("Person detected.")
-                    self.waiting = False
-                    self.target_lost_time = 0.0
+#             # If we have lost the target, start a timer
+#             if not self.target_visible:
+#                 self.target_lost_time += self.tick
+#                 
+#                 if self.target_lost_time > self.lost_detection_timeout and not self.waiting:
+#                     rospy.loginfo("No person in sight.")
+#                     self.target_visible = False
+#                     self.greeting_finished = False
+#                     self.waiting = True
+#             else:
+#                 if self.waiting:
+#                     rospy.loginfo("Person detected.")
+#                     self.waiting = False
+#                     self.target_lost_time = 0.0
 
             rospy.sleep(self.tick)
             
     def jr_says(self, text, voice, start_listening=False, pause=2):
         self.listening = False
-        self.soundhandle.say(text, voice)
+        #self.stop_speech_recognition()
+        self.soundhandle.say(text, voice, blocking=True)
         if start_listening:
-            rospy.sleep(2)
+            rospy.sleep(pause)
             self.listening = True
-
+            #self.start_speech_recognition()
             
     def detect_person(self, msg):
         min_distance = 10000
@@ -167,33 +175,50 @@ class SpeechModule():
                 
     def speech_recognition(self, msg):
         # Look for a wake up phrase
-        if msg.data in ['hey jr', 'hi jr', 'hey jackrabbot', 'hi jackrabbot', 'hey jackrabbit', 'hi jackrabbit', 'hello jackrabbot', 'hello jackrabbit']:
+        if msg.data in ['hey jr', 'hi jr', 'hello jr', 'hey jackrabbot', 'hi jackrabbot', 'hey jackrabbit', 'hi jackrabbit', 'hello jackrabbot', 'hello jackrabbit']:
             self.jr_says("Hello there. Where would you like to go?", self.tts_voice, start_listening=True)
             return
-
+        
         if not self.listening:
             return
         
-        if msg.data in ['poster session', 'poster sessions', 'poster', 'posters', 'poster area']:
+        found_location = False
+        goal_location = None
+        
+        for phrase in self.allowed_phrases:
+            if msg.data.find(phrase) > 0:
+                found_location = True
+                goal_location = phrase
+                break
+        
+        if not msg.data in self.allowed_phrases and not found_location:
+            return
+        
+        if found_location:
+            phrase = goal_location
+        else:
+            phrase = msg.data
+            
+        if phrase in ['poster session', 'poster sessions', 'poster', 'posters', 'poster area']:
             location = "posters"
-        elif msg.data in ['keynote session', 'keynote sessions', 'keynote talk', 'keynote talks', 'keynote', 'keynotes']:
+        elif phrase in ['keynote session', 'keynote sessions', 'keynote talk', 'keynote talks', 'keynote', 'keynotes']:
             location = "keynotes"
-        elif msg.data in ['demo', 'demos', 'demonstration', 'demonstrations']:
+        elif phrase in ['demo', 'demos', 'demonstration', 'demonstrations']:
             location = "demos"
-        elif msg.data in ['tutorial', 'tutorials', 'tutorial session']:
+        elif phrase in ['tutorial', 'tutorials', 'tutorial session']:
             location = "tutorials"
-        elif msg.data in ['exhibit', 'exhibits', 'exhibit area']:
+        elif phrase in ['exhibit', 'exhibits', 'exhibit area']:
             location = "exhibits"
-        elif msg.data in ['washroom', 'washrooms', 'restroom', 'restrooms', 'bathroom', 'bathrooms', 'mens washroom', 'mens restroom', 'mens bathroom', 'womens washroom', 'womens restroom', 'womens bathroom']:
+        elif phrase in ['washroom', 'washrooms', 'restroom', 'restrooms', 'bathroom', 'bathrooms', 'mens washroom', 'mens restroom', 'mens bathroom', 'womens washroom', 'womens restroom', 'womens bathroom']:
             location = "restrooms"
-        elif msg.data in ['food', 'food area', 'food truck', 'food trucks', 'something to eat', 'cafeteria', 'to trucks', 'to food']:
+        elif phrase in ['food', 'food area', 'food truck', 'food trucks', 'something to eat', 'cafeteria', 'to trucks', 'to food']:
             location = "food"
-        elif msg.data in ['entrance', 'foyer']:
+        elif phrase in ['entrance', 'foyer']:
             location = "entrance"
-        elif msg.data in ['exit']:
+        elif phrase in ['exit']:
             location = "entrance"
         else:
-            self.jr_says("I'm sorry. I did not understand that. Please say again?", self.tts_voice)
+            self.jr_says("I'm sorry. I did not understand that. Please say again?", self.tts_voice, pause=2, start_listening=True)
             return
         
         self.begin_phrases = ['Great choice.', 'No problem.', 'Sure thing.', 'My pleasure.']
