@@ -89,7 +89,7 @@ class SpeechModule():
         #self.goto_service = rospy.ServiceProxy('/goto_location', GotoLocation)
 
         # Subscribe to the speech recognition /recognizer/output topic to receive voice commands
-        rospy.Subscriber("/recognizer/output", String, self.speech_recognition)
+        rospy.Subscriber("/recognizer/output", String, self.speech_recognition, queue_size=1)
         
         # Subscribe to the target topic for tracking people
         rospy.Subscriber('target_topic', DetectionArray, self.detect_person, queue_size=1)
@@ -156,8 +156,9 @@ class SpeechModule():
     def speech_recognition(self, msg):
         # Look for a wake up phrase
         if msg.data in ['hey jr', 'hi jr', 'hey jackrabbot', 'hi jackrabbot', 'hey jackrabbit', 'hi jackrabbit', 'hello jackrabbot', 'hello jackrabbit']:
-            self.listening = True
             self.soundhandle.say("Hello there. Where would you like to go?", self.tts_voice)
+            rospy.sleep(2)
+            self.listening = True
             return
 
         if not self.listening:
@@ -182,7 +183,9 @@ class SpeechModule():
         elif msg.data in ['exit']:
             location = "entrance"
         else:
+            self.listening = False
             self.soundhandle.say("I'm sorry. I did not understand that. Please say again?", self.tts_voice)
+            self.listening = True
             return
         
         self.begin_phrases = ['Great choice.', 'No problem.', 'Sure thing.', 'My pleasure.']
@@ -214,6 +217,7 @@ class SpeechModule():
         
         response = begin + ' I will take you to the ' + location_to_phrase[location] + '. ' + end
         
+        self.listening = False
         self.soundhandle.say(response, self.tts_voice)
         
         # Create a goto request for the navigation server
@@ -228,6 +232,7 @@ class SpeechModule():
         #if response.success:
         #   self.soundhandle.say("We have arrived.", self.tts_voice)
         
+        rospy.sleep(2)
         self.listening = False
             
     def shutdown(self):
