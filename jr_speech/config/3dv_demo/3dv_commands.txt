@@ -35,9 +35,9 @@ food truck
 food trucks
 something to eat
 cafeteria
-entrance
-exit
-foyer
+the entrance
+the exit
+the foyer
 hey jr
 hi jr
 hello jr

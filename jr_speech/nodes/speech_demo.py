@@ -213,10 +213,10 @@ class SpeechModule():
             location = "restrooms"
         elif phrase in ['food', 'food area', 'food truck', 'food trucks', 'something to eat', 'cafeteria', 'to trucks', 'to food']:
             location = "food"
-        elif phrase in ['entrance', 'foyer']:
-            location = "entrance"
-        elif phrase in ['exit']:
-            location = "entrance"
+        elif phrase in ['the entrance', 'the foyer']:
+            location = "the entrance"
+        elif phrase in ['the exit']:
+            location = "exit"
         else:
             self.jr_says("I'm sorry. I did not understand that. Please say again?", self.tts_voice, pause=2, start_listening=True)
             return
@@ -232,7 +232,7 @@ class SpeechModule():
                               'restrooms':'restrooms',
                               'mens restroom':'mens restroom',
                               'womens restroom':'womens restroom',
-                              'food':'food trucks',
+                              'food':'food area',
                               'entrance':'entrance',
                               'exit':'exit'}
         
