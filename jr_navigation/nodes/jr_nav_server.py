@@ -42,7 +42,7 @@ class NavServer():
         # Set the shutdown function (stop the robot)
 #        rospy.on_shutdown(self.shutdown)
         
-        # Get the path of the configuration file
+        # Get the path of the file listing valid locations
         nav_config_file = rospy.get_param('~nav_config_file', 'config/locations.yaml')
         
         # Assume an average speed for the robot
