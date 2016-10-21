@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 """
-    jr_speech_module.py - Version 1.0 2016-09-10
+    speech_demo.py - Version 1.0 2016-09-10
     
     Look for people published on the people detection topic and offer to usher them
     to specific locations within a conference hall.
@@ -37,7 +37,7 @@ import random
 
 class SpeechModule():
     def __init__(self):
-        rospy.init_node("jr_speech_module")
+        rospy.init_node("speech_demo")
         
         # Set the shutdown function
         rospy.on_shutdown(self.shutdown)
