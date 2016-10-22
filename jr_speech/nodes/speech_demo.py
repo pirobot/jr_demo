@@ -199,19 +199,19 @@ class SpeechModule():
         else:
             phrase = msg.data
             
-        if phrase in ['the poster session', 'the poster sessions', 'the poster', 'the posters', 'the poster area']:
+        if phrase in ['poster session', 'poster sessions', 'the poster', 'the posters', 'poster area']:
             location = "posters"
-        elif phrase in ['the keynote session', 'the keynote sessions', 'the keynote talk', 'the keynote talks', 'the keynote', 'the keynotes']:
+        elif phrase in ['keynote session', 'keynote sessions', 'keynote talk', 'keynote talks', 'the keynote', 'the keynotes']:
             location = "keynotes"
         elif phrase in ['the demo', 'the demos', 'the demonstration', 'the demonstrations']:
             location = "demos"
-        elif phrase in ['the tutorial', 'the tutorials', 'the tutorial session']:
+        elif phrase in ['the tutorial', 'the tutorials', 'tutorial session']:
             location = "tutorials"
-        elif phrase in ['the exhibit', 'the exhibits', 'the exhibit area']:
+        elif phrase in ['the exhibit', 'the exhibits', 'exhibit area']:
             location = "exhibits"
-        elif phrase in ['the washroom', 'the washrooms', 'the restroom', 'the restrooms', 'the bathroom', 'the bathrooms', 'the mens washroom', 'the mens restroom', 'the mens bathroom', 'the womens washroom', 'the womens restroom', 'the womens bathroom']:
+        elif phrase in ['washroom', 'washrooms', 'restroom', 'restrooms', 'bathroom', 'bathrooms', 'mens washroom', 'mens restroom', 'mens bathroom', 'womens washroom', 'womens restroom', 'womens bathroom']:
             location = "restrooms"
-        elif phrase in ['the food', 'the food area', 'the food truck', 'the food trucks', 'something to eat', 'the cafeteria']:
+        elif phrase in ['the food', 'food area', 'food truck', 'food trucks', 'something to eat', 'the cafeteria']:
             location = "food"
         elif phrase in ['the entrance', 'the foyer']:
             location = "the entrance"

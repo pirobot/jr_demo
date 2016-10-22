@@ -1,7 +1,7 @@
 the posters
-the poster session
-the poster sessions
-the poster area
+poster session
+poster sessions
+poster area
 the keynotes
 the keynote
 keynote sessions
@@ -17,24 +17,24 @@ the exhibits
 exhibit area
 the tutorial
 the tutorials
-the tutorial session
-the tutorial sessions
-the bathroom
-the bathrooms
-the mens bathroom
-the womens bathroom
-the washroom
-the washrooms
-the mens washroom
-the womens washroom
-the restroom
-the restrooms
-the mens restroom
-the womens restroom
+tutorial session
+tutorial sessions
+bathroom
+bathrooms
+mens bathroom
+womens bathroom
+washroom
+washrooms
+mens washroom
+womens washroom
+restroom
+restrooms
+mens restroom
+womens restroom
 the food
-the food area
-the food truck
-the food trucks
+food area
+food truck
+food trucks
 something to eat
 the cafeteria
 the entrance
