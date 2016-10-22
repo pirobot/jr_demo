@@ -1,40 +1,42 @@
-posters
-poster session
-poster area
-keynotes
-keynote
+the posters
+the poster session
+the poster sessions
+the poster area
+the keynotes
+the keynote
 keynote sessions
 keynote session
 keynote talks
 keynote talk
-demo
-demos
-demonstration
-demonstrations
-exhibit
-exhibits
+the demo
+the demos
+the demonstration
+the demonstrations
+the exhibit
+the exhibits
 exhibit area
-tutorial
-tutorials
-tutorial session
-bathroom
-bathrooms
-mens bathroom
-womens bathroom
-washroom
-washrooms
-mens washroom
-womens washroom
-restroom
-restrooms
-mens restroom
-womens restroom
-food
-food area
-food truck
-food trucks
+the tutorial
+the tutorials
+the tutorial session
+the tutorial sessions
+the bathroom
+the bathrooms
+the mens bathroom
+the womens bathroom
+the washroom
+the washrooms
+the mens washroom
+the womens washroom
+the restroom
+the restrooms
+the mens restroom
+the womens restroom
+the food
+the food area
+the food truck
+the food trucks
 something to eat
-cafeteria
+the cafeteria
 the entrance
 the exit
 the foyer

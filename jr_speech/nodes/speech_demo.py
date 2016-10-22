@@ -199,19 +199,19 @@ class SpeechModule():
         else:
             phrase = msg.data
             
-        if phrase in ['poster session', 'poster sessions', 'poster', 'posters', 'poster area']:
+        if phrase in ['the poster session', 'the poster sessions', 'the poster', 'the posters', 'the poster area']:
             location = "posters"
-        elif phrase in ['keynote session', 'keynote sessions', 'keynote talk', 'keynote talks', 'keynote', 'keynotes']:
+        elif phrase in ['the keynote session', 'the keynote sessions', 'the keynote talk', 'the keynote talks', 'the keynote', 'the keynotes']:
             location = "keynotes"
-        elif phrase in ['demo', 'demos', 'demonstration', 'demonstrations']:
+        elif phrase in ['the demo', 'the demos', 'the demonstration', 'the demonstrations']:
             location = "demos"
-        elif phrase in ['tutorial', 'tutorials', 'tutorial session']:
+        elif phrase in ['the tutorial', 'the tutorials', 'the tutorial session']:
             location = "tutorials"
-        elif phrase in ['exhibit', 'exhibits', 'exhibit area']:
+        elif phrase in ['the exhibit', 'the exhibits', 'the exhibit area']:
             location = "exhibits"
-        elif phrase in ['washroom', 'washrooms', 'restroom', 'restrooms', 'bathroom', 'bathrooms', 'mens washroom', 'mens restroom', 'mens bathroom', 'womens washroom', 'womens restroom', 'womens bathroom']:
+        elif phrase in ['the washroom', 'the washrooms', 'the restroom', 'the restrooms', 'the bathroom', 'the bathrooms', 'the mens washroom', 'the mens restroom', 'the mens bathroom', 'the womens washroom', 'the womens restroom', 'the womens bathroom']:
             location = "restrooms"
-        elif phrase in ['food', 'food area', 'food truck', 'food trucks', 'something to eat', 'cafeteria', 'to trucks', 'to food']:
+        elif phrase in ['the food', 'the food area', 'the food truck', 'the food trucks', 'something to eat', 'the cafeteria']:
             location = "food"
         elif phrase in ['the entrance', 'the foyer']:
             location = "the entrance"
@@ -221,7 +221,8 @@ class SpeechModule():
             self.jr_says("I'm sorry. I did not understand that. Please say again?", self.tts_voice, pause=2, start_listening=True)
             return
         
-        self.begin_phrases = ['Great choice.', 'No problem.', 'Sure thing.', 'My pleasure.']
+        #self.begin_phrases = ['Great choice.', 'No problem.', 'Sure thing.', 'My pleasure.']
+        self.begin_phrases = ['No problem.']
         self.end_phrases = ['Right this way.', 'Please follow me.', 'Come this way.']
        
         location_to_phrase = {'posters':'poster sessions',
