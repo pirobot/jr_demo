@@ -1,0 +1,5 @@
+<launch>
+
+  <node pkg="jr_navigation" type="gamepad_buttons.py" name="gamepad_buttons" clear_params="true" output="screen" respawn="true" />
+
+</launch>
