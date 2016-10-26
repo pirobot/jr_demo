@@ -1,20 +1,26 @@
+posters
 the posters
 poster session
 poster sessions
 poster area
+keynotes
 the keynotes
 the keynote
 keynote sessions
 keynote session
 keynote talks
 keynote talk
+demos
 the demo
 the demos
+demonstrations
 the demonstration
 the demonstrations
+exhibits
 the exhibit
 the exhibits
 exhibit area
+tutorials
 the tutorial
 the tutorials
 tutorial session
@@ -31,14 +37,19 @@ restroom
 restrooms
 mens restroom
 womens restroom
+food
 the food
 food area
 food truck
 food trucks
 something to eat
+cafeteria
 the cafeteria
+entrance
 the entrance
+exit
 the exit
+foyer
 the foyer
 hey jr
 hi jr

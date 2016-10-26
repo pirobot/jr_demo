@@ -199,23 +199,23 @@ class SpeechModule():
         else:
             phrase = msg.data
             
-        if phrase in ['poster session', 'poster sessions', 'the poster', 'the posters', 'poster area']:
+        if phrase in ['posters', 'poster session', 'poster sessions', 'the poster', 'the posters', 'poster area']:
             location = "posters"
-        elif phrase in ['keynote session', 'keynote sessions', 'keynote talk', 'keynote talks', 'the keynote', 'the keynotes']:
+        elif phrase in ['keynotes', 'keynote session', 'keynote sessions', 'keynote talk', 'keynote talks', 'the keynote', 'the keynotes']:
             location = "keynotes"
-        elif phrase in ['the demo', 'the demos', 'the demonstration', 'the demonstrations']:
+        elif phrase in ['demos', 'the demo', 'the demos', 'the demonstration', 'the demonstrations']:
             location = "demos"
-        elif phrase in ['the tutorial', 'the tutorials', 'tutorial session']:
+        elif phrase in ['tutorials', 'the tutorial', 'the tutorials', 'tutorial session']:
             location = "tutorials"
-        elif phrase in ['the exhibit', 'the exhibits', 'exhibit area']:
+        elif phrase in ['exhibits', 'the exhibit', 'the exhibits', 'exhibit area']:
             location = "exhibits"
         elif phrase in ['washroom', 'washrooms', 'restroom', 'restrooms', 'bathroom', 'bathrooms', 'mens washroom', 'mens restroom', 'mens bathroom', 'womens washroom', 'womens restroom', 'womens bathroom']:
             location = "restrooms"
-        elif phrase in ['the food', 'food area', 'food truck', 'food trucks', 'something to eat', 'the cafeteria']:
+        elif phrase in ['food', 'the food', 'food area', 'food truck', 'food trucks', 'something to eat', 'cafeteria', 'the cafeteria']:
             location = "food"
-        elif phrase in ['the entrance', 'the foyer']:
+        elif phrase in ['entrance', 'the entrance', 'foyer', 'the foyer']:
             location = "the entrance"
-        elif phrase in ['the exit']:
+        elif phrase in ['exit', 'the exit']:
             location = "exit"
         else:
             self.jr_says("I'm sorry. I did not understand that. Please say again?", self.tts_voice, pause=2, start_listening=True)
@@ -233,7 +233,7 @@ class SpeechModule():
                               'restrooms':'restrooms',
                               'mens restroom':'mens restroom',
                               'womens restroom':'womens restroom',
-                              'food':'food area',
+                              'food':'food trucks',
                               'entrance':'entrance',
                               'exit':'exit'}
         
