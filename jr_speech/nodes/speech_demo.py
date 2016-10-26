@@ -214,7 +214,7 @@ class SpeechModule():
         elif phrase in ['food', 'the food', 'food area', 'food truck', 'food trucks', 'something to eat', 'cafeteria', 'the cafeteria']:
             location = "food"
         elif phrase in ['entrance', 'the entrance', 'foyer', 'the foyer']:
-            location = "the entrance"
+            location = "entrance"
         elif phrase in ['exit', 'the exit']:
             location = "exit"
         else:
