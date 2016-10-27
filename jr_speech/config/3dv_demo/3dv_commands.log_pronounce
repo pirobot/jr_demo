@@ -1,7 +1,10 @@
+A - Main 
+ABORT - Main 
 AREA - Main 
 BATHROOM - Main 
 BATHROOMS - Main 
 CAFETERIA - Main 
+CONTINUE - Main 
 DEMO - Main 
 DEMONSTRATION - Main 
 DEMONSTRATIONS - Main 
@@ -11,20 +14,29 @@ ENTRANCE - Main
 EXHIBIT - Main 
 EXHIBITS - Main 
 EXIT - Main 
+FOLLOW - Main 
 FOOD - Main 
 FOYER - Main 
+GO - Main 
+GOING - Main 
 HELLO - Main 
 HEY - Main 
 HI - Main 
+HOLD - Main 
 JACKRABBIT - Main 
 pronounce: verbosity is 1
 JACKRABBOT - By LtoS rules
 I think this is a non-word: JR
 LETTER-J - Morpheme: LETTER-J 
 R - By LtoS rules
+KEEP - Main 
 KEYNOTE - Main 
 KEYNOTES - Main 
+LEAD - Main 
+ME - Main 
 MENS - Main 
+MINUTE - Main 
+ON - Main 
 POSTER - Main 
 POSTERS - Main 
 RESTROOM - Main 
@@ -32,14 +44,18 @@ RESTROOMS - Main
 SESSION - Main 
 SESSIONS - Main 
 SOMETHING - Main 
+STOP - Main 
+TAKE - Main 
 TALK - Main 
 TALKS - Main 
 THE - Main 
+THERE - Main 
 TO - Main 
 TRUCK - Main 
 TRUCKS - Main 
 TUTORIAL - Main 
 TUTORIALS - Main 
+WAIT - Main 
 WASHROOM - Main 
 WASHROOMS - Morpheme: WASH ROOM S 
 WOMENS - Morpheme: WOMEN S 

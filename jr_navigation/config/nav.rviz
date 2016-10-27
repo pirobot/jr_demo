@@ -9,9 +9,11 @@ Panels:
         - /RobotModel1
         - /Local Plan1
         - /Global Plan1
+        - /Inflated Obtacles1
         - /Global Costmap1
         - /Local Costmap1
         - /Footprint1
+        - /Cost Cloud1
       Splitter Ratio: 0.399329
     Tree Height: 719
   - Class: rviz/Selection
@@ -172,6 +174,9 @@ Visualization Manager:
       Class: rviz/Path
       Color: 255; 0; 0
       Enabled: true
+      Head Diameter: 0.3
+      Head Length: 0.2
+      Length: 0.3
       Line Style: Lines
       Line Width: 0.03
       Name: Local Plan
@@ -179,6 +184,10 @@ Visualization Manager:
         X: 0
         Y: 0
         Z: 0
+      Pose Style: None
+      Radius: 0.03
+      Shaft Diameter: 0.1
+      Shaft Length: 0.1
       Topic: /move_base/TrajectoryPlannerROS/local_plan
       Unreliable: false
       Value: true
@@ -187,6 +196,9 @@ Visualization Manager:
       Class: rviz/Path
       Color: 0; 213; 0
       Enabled: true
+      Head Diameter: 0.3
+      Head Length: 0.2
+      Length: 0.3
       Line Style: Billboards
       Line Width: 0.05
       Name: Global Plan
@@ -194,6 +206,10 @@ Visualization Manager:
         X: 0
         Y: 0
         Z: 0
+      Pose Style: None
+      Radius: 0.03
+      Shaft Diameter: 0.1
+      Shaft Length: 0.1
       Topic: /move_base/TrajectoryPlannerROS/global_plan
       Unreliable: false
       Value: true
@@ -260,10 +276,10 @@ Visualization Manager:
     - Alpha: 1
       Class: rviz/GridCells
       Color: 38; 190; 255
-      Enabled: false
+      Enabled: true
       Name: Inflated Obtacles
       Topic: /move_base/global_costmap/inflated_obstacles
-      Value: false
+      Value: true
     - Class: rviz/Marker
       Enabled: true
       Marker Topic: /docking_station_marker
@@ -335,6 +351,7 @@ Visualization Manager:
       Unreliable: false
       Value: false
       Visibility:
+        "": true
         Docking Station: true
         Footprint: true
         Global Costmap: true
@@ -371,20 +388,20 @@ Visualization Manager:
       Class: rviz/Map
       Color Scheme: costmap
       Draw Behind: false
-      Enabled: true
+      Enabled: false
       Name: Global Costmap
       Topic: /move_base/global_costmap/costmap
       Unreliable: false
-      Value: true
-    - Alpha: 0.5
+      Value: false
+    - Alpha: 0.7
       Class: rviz/Map
       Color Scheme: costmap
       Draw Behind: false
-      Enabled: false
+      Enabled: true
       Name: Local Costmap
       Topic: /move_base/local_costmap/costmap
       Unreliable: false
-      Value: false
+      Value: true
     - Alpha: 1
       Class: rviz/Polygon
       Color: 25; 255; 0
@@ -392,6 +409,36 @@ Visualization Manager:
       Name: Footprint
       Topic: /move_base/local_costmap/footprint
       Unreliable: false
+      Value: true
+    - Alpha: 1
+      Autocompute Intensity Bounds: true
+      Autocompute Value Bounds:
+        Max Value: 0
+        Min Value: 0
+        Value: true
+      Axis: Z
+      Channel Name: intensity
+      Class: rviz/PointCloud2
+      Color: 255; 255; 255
+      Color Transformer: AxisColor
+      Decay Time: 0
+      Enabled: true
+      Invert Rainbow: false
+      Max Color: 255; 255; 255
+      Max Intensity: 4096
+      Min Color: 0; 0; 0
+      Min Intensity: 0
+      Name: Cost Cloud
+      Position Transformer: XYZ
+      Queue Size: 10
+      Selectable: true
+      Size (Pixels): 3
+      Size (m): 0.02
+      Style: Flat Squares
+      Topic: /move_base/TrajectoryPlannerROS/cost_cloud
+      Unreliable: false
+      Use Fixed Frame: true
+      Use rainbow: true
       Value: true
   Enabled: true
   Global Options:
@@ -412,22 +459,22 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 23.4165
+      Distance: 18.8379
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.06
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: 0.531423
-        Y: 0.514782
-        Z: 3.47883
+        X: -0.50186
+        Y: -3.27598
+        Z: 2.54023
       Name: Current View
       Near Clip Distance: 0.01
       Pitch: 1.5698
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 6.12315
+      Yaw: 5.51815
     Saved: ~
 Window Geometry:
   Camera:
@@ -439,7 +486,7 @@ Window Geometry:
   Hide Right Dock: false
   Image:
     collapsed: false
-  QMainWindow State: 000000ff00000000fd00000004000000000000016a0000035efc0200000008fb0000001200530065006c0065006300740069006f006e00000001e10000009b0000006400fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007302000001ed000001df00000198000000a3fb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afb000000100044006900730070006c00610079007301000000280000035e000000dd00fffffffb0000000c00430061006d00650072006100000003a7000000d30000001600fffffffb0000000c00430061006d006500720061000000035c0000011e0000000000000000fb0000000a0049006d00610067006500000003a8000000d20000001600ffffff000000010000010f00000288fc0200000003fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000041000000780000000000000000fb0000000a00560069006500770073000000004100000288000000b000fffffffb0000001200530065006c0065006300740069006f006e010000025a000000b200000000000000000000000200000490000000a9fc0100000001fb0000000a00560069006500770073030000004e00000080000002e10000019700000003000004a00000003efc0100000002fb0000000800540069006d00650000000000000004a0000002f600fffffffb0000000800540069006d00650100000000000004500000000000000000000002c20000035e00000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
+  QMainWindow State: 000000ff00000000fd00000004000000000000016a0000035efc0200000008fb0000001200530065006c0065006300740069006f006e00000001e10000009b0000006400fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007302000001ed000001df00000198000000a3fb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afb000000100044006900730070006c00610079007301000000280000035e000000dd00fffffffb0000000c00430061006d00650072006100000003a7000000d30000001600fffffffb0000000c00430061006d006500720061000000035c0000011e0000000000000000fb0000000a0049006d00610067006500000003a8000000d20000001600ffffff000000010000010f00000288fc0200000003fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000041000000780000000000000000fb0000000a00560069006500770073000000004100000288000000b000fffffffb0000001200530065006c0065006300740069006f006e010000025a000000b200000000000000000000000200000490000000a9fc0100000001fb0000000a00560069006500770073030000004e00000080000002e10000019700000003000004a00000003efc0100000002fb0000000800540069006d00650000000000000004a0000002f600fffffffb0000000800540069006d00650100000000000004500000000000000000000003ca0000035e00000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
   Selection:
     collapsed: false
   Time:
@@ -448,6 +495,6 @@ Window Geometry:
     collapsed: false
   Views:
     collapsed: false
-  Width: 1074
-  X: 777
-  Y: 194
+  Width: 1338
+  X: 567
+  Y: 91

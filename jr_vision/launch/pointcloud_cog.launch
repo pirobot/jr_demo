@@ -1,0 +1,16 @@
+<launch>
+
+  <node pkg="jr_vision" type="pointcloud_cog.py" name="pointcloud_cog" clear_params="true" output="screen" respawn="true">
+     <remap from="point_cloud" to="/camera/depth_registered/points" />
+     
+     <rosparam>
+        min_x: -0.5
+        max_x: 0.5
+        min_y: -0.5
+        max_y: 0.5
+        max_z: 2.0
+     </rosparam>
+     
+  </node>
+
+</launch>

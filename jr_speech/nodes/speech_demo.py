@@ -60,7 +60,7 @@ class SpeechModule():
         
         # Get the Pocketsphinx vocabulary so we can filter recognition results
         allowed_phrases = rospy.get_param('~allowed_phrases', 'config/3dv_demo/3dv_commands.txt')
-        
+                
         # Load the location data
         with open(nav_config_file, 'r') as config:
             self.locations = load(config)
@@ -91,7 +91,7 @@ class SpeechModule():
         rospy.sleep(2)
         
         # Publish the requested location so the executive node can use it
-        self.location_pub = rospy.Publisher('/speech_command', String, queue_size=1)
+        self.speech_pub = rospy.Publisher('/speech_command', String, queue_size=1)
 
         # Connect to the goto_location service
         #rospy.wait_for_service('/goto_location', 60)
@@ -102,7 +102,7 @@ class SpeechModule():
         rospy.Subscriber("/recognizer/output", String, self.speech_recognition, queue_size=1)
         
         # Subscribe to the target topic for tracking people
-        rospy.Subscriber('target_topic', DetectionArray, self.detect_person, queue_size=1)
+        #rospy.Subscriber('target_topic', DetectionArray, self.detect_person, queue_size=1)
         
         # Wait for the speech recognition services to be ready
         rospy.wait_for_service('/recognizer/start', 15)
@@ -176,7 +176,7 @@ class SpeechModule():
     def speech_recognition(self, msg):
         # Look for a wake up phrase
         if msg.data in ['hey jr', 'hi jr', 'hello jr', 'hey jackrabbot', 'hi jackrabbot', 'hey jackrabbit', 'hi jackrabbit', 'hello jackrabbot', 'hello jackrabbit']:
-            self.jr_says("Hello there. Where would you like to go?", self.tts_voice, start_listening=True)
+            self.jr_says("Hello there. How can I help?", self.tts_voice, start_listening=True)
             return
         
         if not self.listening:
@@ -199,11 +199,14 @@ class SpeechModule():
         else:
             phrase = msg.data
             
+        location = None
+        command = None
+            
         if phrase in ['posters', 'poster session', 'poster sessions', 'the poster', 'the posters', 'poster area']:
             location = "posters"
         elif phrase in ['keynotes', 'keynote session', 'keynote sessions', 'keynote talk', 'keynote talks', 'the keynote', 'the keynotes']:
             location = "keynotes"
-        elif phrase in ['demos', 'the demo', 'the demos', 'the demonstration', 'the demonstrations']:
+        elif phrase in ['demos', 'the demo', 'the demos', 'demonstration', 'demonstrations', 'the demonstration', 'the demonstrations']:
             location = "demos"
         elif phrase in ['tutorials', 'the tutorial', 'the tutorials', 'tutorial session']:
             location = "tutorials"
@@ -217,13 +220,29 @@ class SpeechModule():
             location = "entrance"
         elif phrase in ['exit', 'the exit']:
             location = "exit"
+        elif phrase in ['wait', 'wait a minute', 'hold on', 'stop', 'abort']:
+            command = "wait"
+        elif phrase in ['lead', 'lead me', 'lead me there', 'take me', 'take me there']:
+            command = "lead"
+        elif phrase in ['go', 'keep going', 'continue']:
+            command = "go"
+        elif phrase in ['follow', 'follow me', 'follow me there']:
+            command = "follow"
         else:
             self.jr_says("I'm sorry. I did not understand that. Please say again?", self.tts_voice, pause=2, start_listening=True)
             return
         
         #self.begin_phrases = ['Great choice.', 'No problem.', 'Sure thing.', 'My pleasure.']
-        self.begin_phrases = ['No problem.']
+        self.begin_phrases = ['Great.']
         self.end_phrases = ['Right this way.', 'Please follow me.', 'Come this way.']
+        
+        #random.shuffle(self.begin_phrases)
+        #random.shuffle(self.end_phrases)
+        
+        command_to_phrase = {'wait':'OK. I will wait.',
+                             'lead':'OK. I will lead.',
+                             'go':'OK. I am going now.',
+                             'follow':'OK. Please follow me.'}
        
         location_to_phrase = {'posters':'poster sessions',
                               'keynotes':'keynote talks',
@@ -237,25 +256,26 @@ class SpeechModule():
                               'entrance':'entrance',
                               'exit':'exit'}
         
-        random.shuffle(self.begin_phrases)
-        random.shuffle(self.end_phrases)
+        # Initialize the speech request
+        speech_request = String()
         
-        # Randomize the beginning and ending of each response
-        if location == 'restrooms':
-            begin = 'No problem'
-        else:
+        if location is not None:
+            location_phrase = location_to_phrase[location]
+            speech_request.data = location
+            rospy.loginfo("Speech location: " + str(location))
             begin = self.begin_phrases[0]
-            
-        end = self.end_phrases[0]
-        
-        response = begin + ' I will take you to the ' + location_to_phrase[location] + '. ' + end
+            end = self.end_phrases[0]
+            response = begin + ' I know how to get to the ' + location_to_phrase[location] + '. '
+        elif command is not None:
+            speech_request.data = command
+            rospy.loginfo("Speech command: " + str(command))
+
+            response =  command_to_phrase[command] 
         
         self.jr_says(response, self.tts_voice)
         
         # Publish the request
-        nav_request = String()
-        nav_request.data = location
-        self.location_pub.publish(nav_request)
+        self.speech_pub.publish(speech_request)
         
         # Create a goto request for the navigation server
         #request = GotoLocationRequest()
@@ -268,6 +288,7 @@ class SpeechModule():
         
         #if response.success:
         #   self.jr_says("We have arrived.", self.tts_voice)
+        
             
     def shutdown(self):
         rospy.sleep(1)
