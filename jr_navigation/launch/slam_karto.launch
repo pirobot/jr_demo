@@ -1,0 +1,8 @@
+<launch>
+
+  <node pkg="slam_karto" type="slam_karto" name="slam_karto" output="screen">
+    <remap from="scan" to="/segway/filtered_scan" />
+    <param name="base_frame" value="/segway/base_link" />
+  </node>
+
+</launch>

@@ -1,0 +1,36 @@
+<launch>
+
+   <arg name="no_static_map" default="false"/>
+
+   <node pkg="move_base" type="move_base" name="move_base" clear_params="true" output="screen" >
+      <!-- Remap into correct namespace for mux -->
+      <remap from="cmd_vel" to="/segway/navigation/cmd_vel" />
+       
+       <!-- Change the name of the move_base; it is first checked and handled by the client that we're using -->
+	   <remap from="move_base/goal" to="move_base_navi/goal" />
+       <remap from="move_base/result" to="move_base_navi/result" />
+	   <remap from="move_base/feedback" to="move_base_navi/feedback" />
+       <remap from="move_base/status" to="move_base_navi/status" />
+       <remap from="move_base/cancel" to="move_base_navi/cancel" />
+       <remap from="move_base_simple/goal" to="move_base_navi_simple/goal"/>
+       <remap from="/odom" to="/segway/odometry/local_filtered" />
+		
+       <!-- Load common configuration files -->
+       <rosparam file="$(find jr_navigation)/config/gazebo/config_common/move_base_params.yaml" command="load" />   
+
+       <rosparam file="$(find jr_navigation)/config/gazebo/config_common/costmap_common_params.yaml" command="load" ns="global_costmap" />
+       <rosparam file="$(find jr_navigation)/config/gazebo/config_common/costmap_common_params.yaml" command="load" ns="local_costmap" />
+       
+       <rosparam file="$(find jr_navigation)/config/gazebo/config_common/navfn_planner_params.yaml" command="load" />
+       <rosparam file="$(find jr_navigation)/config/gazebo/config_common/base_local_planner_params.yaml" command="load" />
+
+       <rosparam file="$(find jr_navigation)/config/gazebo/config_common/dwa_local_planner_params.yaml" command="load" />
+       <rosparam file="$(find jr_navigation)/config/gazebo/config_common/global_planner_params.yaml" command="load" />
+       
+       <rosparam file="$(find jr_navigation)/config/gazebo/config_common/local_costmap_params.yaml" command="load" />
+    
+       <rosparam file="$(find jr_navigation)/config/gazebo/config_no_map/global_costmap_params.yaml" command="load" if="$(arg no_static_map)"/>
+       <rosparam file="$(find jr_navigation)/config/gazebo/config_with_map/global_costmap_params.yaml" command="load" unless="$(arg no_static_map)"/>
+
+    </node>
+</launch>

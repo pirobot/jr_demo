@@ -1,0 +1,12 @@
+{
+    "free_thresh": 0.196,
+    "image": "gates_1.png",
+    "negate": 0,
+    "occupied_thresh": 0.65,
+    "origin": [
+        -24.1,
+        -12.7,
+        0.0
+    ],
+    "resolution": 0.05
+}

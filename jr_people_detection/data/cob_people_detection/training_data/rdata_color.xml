@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<opencv_storage>
+<projection_matrix type_id="opencv-matrix">
+  <rows>0</rows>
+  <cols>0</cols>
+  <dt>u</dt>
+  <data></data></projection_matrix>
+<eigenvalues type_id="opencv-matrix">
+  <rows>0</rows>
+  <cols>0</cols>
+  <dt>u</dt>
+  <data></data></eigenvalues>
+<unknown_threshold>2.9454187326713065e-269</unknown_threshold>
+<average_image type_id="opencv-matrix">
+  <rows>0</rows>
+  <cols>0</cols>
+  <dt>u</dt>
+  <data></data></average_image>
+<model_features type_id="opencv-matrix">
+  <rows>0</rows>
+  <cols>0</cols>
+  <dt>u</dt>
+  <data></data></model_features>
+<numeric_labels>
+  </numeric_labels>
+ <!-- resumed -->
+
+<string_labels>
+  </string_labels>
+</opencv_storage>

@@ -1,0 +1,8 @@
+<launch>
+
+   <node pkg="amcl" type="amcl" name="amcl" output="screen" clear_params="true">
+      <rosparam command="load" file="$(find jr_navigation)/config/amcl.yaml"/>
+      <remap from="scan" to="/segway/filtered_scan" />
+   </node>
+    
+</launch>

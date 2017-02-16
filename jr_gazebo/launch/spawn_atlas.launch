@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+
+<launch>
+    <arg name="robot_name" default="atlas"/>
+    
+    <!-- Load the Robot Description-->
+    <param name="robot_description" command="$(find xacro)/xacro.py  '$(find atlas_description)/robots/atlas.urdf.xacro'" />
+
+    <!-- Run a python script to the send a service call to gazebo_ros to spawn a URDF robot -->
+    <node name="spawn_atlas_model" pkg="gazebo_ros" type="spawn_model"
+      args="-urdf -model atlas -param robot_description"/>
+    
+    <!-- Launch Segway sim ros_control -->
+    <include file="$(find jr_sim_control)/launch/jr_sibot_control.launch"/>
+
+</launch>

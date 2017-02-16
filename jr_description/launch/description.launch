@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<launch>
+  <arg name="use_gui" default="false"/>
+  <arg name="publish_joint_states" default="true" />
+
+  <param name="robot_description" command="$(find xacro)/xacro.py '$(find jr_description)/urdf/description.xacro'" />
+
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" >
+    <param name="publish_frequency" type="double" value="100.0" />
+    <param name="tf_prefix" value="/segway" />
+
+  </node>
+  
+  <node if="$(arg publish_joint_states)" name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
+  	<param name="use_gui" value="$(arg use_gui)" />
+  </node>
+  
+</launch>

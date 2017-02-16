@@ -1,0 +1,29 @@
+<launch>
+
+   <arg name="sim"           value="true" />
+   <arg name="no_static_map" value="false" />
+   <arg name="using_amcl"    value="true" />
+   <arg name="map"           default="gazebo/fetch_world.yaml" />
+   <arg name="use_waypoints" default="false"/>
+
+   <!-- Run the map server with the blank map -->
+   <node name="map_server" pkg="map_server" type="map_server" args="$(find jr_navigation)/maps/$(arg map)" output="screen" />
+
+   <!--- Run the Segway move_base wrapper for collection statistics etc -->
+   <include file="$(find jr_navigation)/launch/segway/segway_move_base.launch">
+      <arg name="sim"           value="$(arg sim)" />
+      <arg name="no_static_map" value="$(arg no_static_map)"/>
+      <arg name="using_amcl"    value="$(arg using_amcl)" />
+      <arg name="use_waypoints" value="$(arg use_waypoints)" />
+   </include>
+    
+   <!--- Run the real move_base -->
+   <include file="$(find jr_navigation)/launch/gazebo/jr_gazebo_move_base.launch">
+       <arg name="no_static_map" value="$(arg no_static_map)"/>
+   </include>
+   
+   <!-- Fire up AMCL for localization -->
+  <include file="$(find jr_navigation)/launch/amcl.launch" />
+  
+</launch>
+

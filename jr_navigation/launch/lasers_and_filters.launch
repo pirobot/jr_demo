@@ -1,0 +1,33 @@
+<launch>
+
+    <!-- Filter for rotating laser-->
+    <node pkg="laser_filters" type="scan_to_cloud_filter_chain" respawn="true" name="lidar_scan_filter" clear_params="true">
+        <remap from="scan" to="/sibot/lidar_scan" />
+        <remap from="cloud_filtered" to="/sibot/filtered_lidar_points2" />
+        <param name="target_frame" value="/sibot/left_camera_optical_frame" />
+        <param name="high_fidelity" value="true" />
+        <rosparam command="load" file="$(find sibot_navigation_perception)/config/hokuyo_scan_filter.yaml" />
+        <rosparam command="load" file="$(find sibot_navigation_perception)/config/point_cloud_footprint_filter.yaml" />
+    </node>
+
+    <!-- Filters for base laser -->
+    <!--
+    <node pkg="laser_filters" type="scan_to_cloud_filter_chain" respawn="true" name="sick_scan_filter"  clear_params="true">
+        <remap from="scan" to="/sibot/sick_scan" />
+        <remap from="cloud_filtered" to="/sibot/filtered_sick_points2" />
+        <param name="target_frame" value="/sibot/sick_frame" />
+        <param name="high_fidelity" value="true" />
+        <rosparam command="load" file="$(find sibot_navigation_perception)/config/sick_scan_filter.yaml" />
+        <rosparam command="load" file="$(find sibot_navigation_perception)/config/point_cloud_footprint_filter.yaml" />
+    </node>
+    
+    <node pkg="laser_filters" type="scan_to_scan_filter_chain" name="sick_laser_filter" clear_params="true">
+        <remap from="scan" to="/sibot/sick_scan" />
+        <remap from="scan_filtered" to="/sibot/filtered_sick_scan" />
+        <param name="target_frame" value="/sibot/sick_frame" />
+        <param name="high_fidelity" value="true" />
+        <rosparam command="load" file="$(find sibot_navigation_perception)/config/sick_scan_filter.yaml" />
+    </node>
+    -->
+
+</launch>

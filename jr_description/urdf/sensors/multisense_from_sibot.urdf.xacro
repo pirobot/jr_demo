@@ -1,0 +1,241 @@
+	  <link name="head_root">
+	    <inertial>
+	      <mass value="0.001"/>
+	      <origin xyz="0 0 0"/>
+	      <inertia ixx="0.001" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.001"/>
+	    </inertial>
+	  </link>
+	  
+	  <joint name="head_root_to_base_link_joint" type="fixed">
+	    <origin xyz="-0.2755 0.0525 0.81818" rpy="0 0 0" />
+	    <parent link="base_link" />
+	    <child link="head_root" />
+	  </joint>
+	  
+	  <link
+	    name="head">
+	    <inertial>
+	      <origin
+	        xyz="0.058387 -0.052701 0.027496"
+	        rpy="0 0 0" />
+	      <mass
+	        value="1.752" />
+	      <inertia
+	        ixx="0.0051007"
+	        ixy="1.2402E-05"
+	        ixz="-0.00021495"
+	        iyy="0.0059117"
+	        iyz="-6.6044E-06"
+	        izz="0.0043871" />
+	    </inertial>
+	    <visual>
+	      <origin
+	        xyz="0 0 0"
+	        rpy="0 0 0" />
+	      <geometry>
+	        <mesh
+	          filename="package://jr_description/meshes/head.stl" />
+	      </geometry>
+	      <material
+	        name="">
+	        <color
+	          rgba="0.25 0.25 0.25 1" />
+	      </material>
+	    </visual>
+	    <collision>
+	      <origin
+	        xyz="0 0 0"
+	        rpy="0 0 0" />
+	      <geometry>
+	        <mesh
+	          filename="package://jr_description/meshes/head.stl" />
+	      </geometry>
+	    </collision>
+	
+	  </link>
+	  <joint name="head_root_joint" type="fixed">
+	    <origin xyz="0 0 0" rpy="0 0 0" />
+	    <parent link="head_root" />
+	    <child link="head" />
+	  </joint>
+	  
+	  <joint name="left_camera_optical_joint" type="continuous">
+	    <parent link="left_camera_optical_frame" />
+	    <child link="motor" />
+	  </joint>
+	
+	  <link name="motor"/>
+	  <link name="spindle"/>
+	
+	  <joint name="motor_joint" type="continuous">
+	    <parent link="motor" />
+	    <child link="spindle" />
+	    <axis xyz="0 0 1" />
+	  </joint>
+	
+	  <joint name="spindle_joint" type="continuous">
+	    <parent link="spindle" />
+	    <child link="hokuyo_link" />
+	  </joint>
+	  
+	  <link name="hokuyo_link"/>
+	  
+	  <link name="head_hokuyo_frame"/>
+	  <joint name="head_hokuyo_frame_joint" type="fixed"> 
+	    <!--
+	     This transform accounts for the fact ROS expects laser data in the x forward,
+	     y left, z up frame and the calibraton has the data in x left, y up, z forward.
+	     Thus a roll of -90 * a pitch of -90 will make the appropriate transform. Note
+	     Roll and pitch are both with respect to the origional x left, y up, z forward frame
+	     -->
+	    <origin xyz="0 0 0" rpy="-1.57079632679 -1.57079632679 0.0" />
+	    <parent link="hokuyo_link" />
+	    <child link="head_hokuyo_frame"/>
+	  </joint>  
+	
+	  <link name="left_camera_frame">
+	    <inertial>
+	      <mass value="0.1" />
+	      <origin xyz="0 0 0" />
+	      <inertia ixx="0.001"  ixy="0.0"  ixz="0.0" iyy="0.001"  iyz="0.0" izz="0.001" />
+	    </inertial>
+	  </link>
+	  <joint name="left_camera_frame_joint" type="fixed">
+	    <origin xyz="0.1125 -0.0175 -0.00875"/>
+	    <parent link="head" />
+	    <child link="left_camera_frame" />
+	  </joint>
+	  
+	  <link name="left_camera_optical_frame" />
+	  <joint name="left_camera_optical_frame_joint" type="fixed">
+	    <origin xyz="0 0 0" rpy="-1.57079632679 0.0 -1.57079632679" />
+	    <parent link="left_camera_frame" />
+	    <child link="left_camera_optical_frame"/>
+	  </joint>
+	  
+	  <link name="right_camera_frame">
+	    <inertial>
+	      <mass value="0.1" />
+	      <origin xyz="0 0 0" />
+	      <inertia ixx="0.001"  ixy="0.0"  ixz="0.0" iyy="0.001"  iyz="0.0" izz="0.001" />
+	    </inertial>
+	  </link>
+	  <joint name="right_camera_frame_joint" type="fixed">
+	    <origin xyz="0.1125 -0.08755 -0.00875"/>
+	    <parent link="head" />
+	    <child link="right_camera_frame" />
+	  </joint>
+	  
+	  <link name="right_camera_optical_frame" />
+	  <joint name="right_camera_optical_frame_joint" type="fixed">
+	    <origin xyz="0 0 0" rpy="-1.57079632679 0.0 -1.57079632679" />
+	    <parent link="right_camera_frame" />
+	    <child link="right_camera_optical_frame"/>
+	  </joint>
+	  
+	  <joint name="center_top_led_frame_joint" type="fixed">
+	    <origin xyz="0.1275 -0.052525 0.00675"/>
+	    <parent link="head"/>
+	    <child link="center_top_led_frame"/>
+	  </joint>
+	  <link name="center_top_led_frame">
+	    <inertial>
+	      <mass value="0.1"/>
+	      <origin xyz="0 0 0"/>
+	      <inertia ixx="0.001" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.001"/>
+	    </inertial>
+	  </link>
+	  
+	 <joint name="center_bottom_led_frame_joint" type="fixed">
+	    <origin xyz="0.1275 -0.052525 -0.02425"/>
+	    <parent link="head"/>
+	    <child link="center_bottom_led_frame"/>
+	  </joint>
+	  <link name="center_bottom_led_frame">
+	    <inertial>
+	      <mass value="0.1"/>
+	      <origin xyz="0 0 0"/>
+	      <inertia ixx="0.001" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.001"/>
+	    </inertial>
+	  </link>
+	  
+	 <joint name="left_led_frame_joint" type="fixed">
+	    <origin xyz="0.10385 0.017469 0.036761" rpy="0 -0.15 0.5236"/>
+	    <parent link="head"/>
+	    <child link="left_led_frame"/>
+	  </joint>
+	  <link name="left_led_frame">
+	    <inertial>
+	      <mass value="0.1"/>
+	      <origin xyz="0 0 0"/>
+	      <inertia ixx="0.001" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.001"/>
+	    </inertial>
+	  </link>
+	  
+	 <joint name="right_led_frame_joint" type="fixed">
+	    <origin xyz="0.10385 -0.12252 0.036761" rpy="0 -0.15 -0.5236"/>
+	    <parent link="head"/>
+	    <child link="right_led_frame"/>
+	  </joint>
+	  <link name="right_led_frame">
+	    <inertial>
+	      <mass value="0.1"/>
+	      <origin xyz="0 0 0"/>
+	      <inertia ixx="0.001" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.001"/>
+	    </inertial>
+	  </link>
+	  
+	  <joint name="motor_visual_joint" type="fixed">
+	    <origin xyz="0.055 -0.052525 0.07925" rpy="0 0 0" />
+	    <parent link="head" />
+	    <child link="motor_visual" />
+	  </joint>
+	  <link name="motor_visual" />
+	  
+	  <joint name="hokuyo_visual_joint" type="continuous">
+	    <parent link="motor_visual" />
+	    <child link="hokuyo_visual_link" />
+	    <axis xyz="1 0 0" />
+	  </joint>
+	
+	  <link
+	    name="hokuyo_visual_link">
+	    <inertial>
+	      <origin
+	        xyz="0.042795 -0.0004254 -0.0031482"
+	        rpy="0 0 0" />
+	      <mass
+	        value="0.29823" />
+	      <inertia
+	        ixx="0.00027212"
+	        ixy="4.6535E-06"
+	        ixz="1.9506E-06"
+	        iyy="0.0003245"
+	        iyz="-3.2249E-06"
+	        izz="0.00021294" />
+	    </inertial>
+	    <visual>
+	      <origin xyz="0 0 0" rpy="0 0 0" />
+	      <geometry>
+	        <mesh filename="package://jr_description/meshes/hokuyo_visual_link.stl" />
+	      </geometry>
+	      <material
+	        name="">
+	        <color rgba="0.72941 0.35686 0.023529 1" />
+	      </material>
+	    </visual>
+	    <collision>
+	      <origin xyz="0 0 0" rpy="0 0 0" />
+	      <geometry>
+	        <mesh filename="package://jr_description/meshes/hokuyo_visual_link.stl" />
+	      </geometry>
+	    </collision>
+	  </link>
+	
+	  <link name="accel" />
+	  <joint name="accel_joint" type="fixed">
+	    <origin xyz="0.065 -0.0223 -0.0095" rpy="0 1.5708 0" />
+	    <parent link="head_root" />
+	    <child link="accel" />
+	  </joint>
+	  

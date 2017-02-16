@@ -1,0 +1,17 @@
+<launch>
+
+  <param name="robot_description" command="$(find xacro)/xacro.py  '$(find jr_description)/robots/jr_with_primesense.xacro'" />
+  
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" >
+    <param name="tf_prefix" value="/sibot" />
+    <param name="publish_frequency" value="20.0" />
+    <remap from="joint_states" to="/sibot/joint_states" />
+  </node>
+  
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
+     <param name="use_gui" value="True" />
+     <param name="rate" value="20.0"/>
+     <remap from="joint_states" to="/sibot/joint_states" />
+  </node>
+
+</launch>

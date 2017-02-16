@@ -1,0 +1,19 @@
+<launch>
+
+   <arg name="sim"           default="false" />
+   <arg name="no_static_map" default="true" />
+   <arg name="using_amcl"    default="true" />
+   <arg name="use_waypoints" default="false"/>
+
+   <!-- Run the segway_move_base action client for tracking status -->
+   <node pkg="segway_ros" name="segway_move_base" type="segway_move_base" output="screen" clear_params="true">
+      <param name="sim"              value="$(arg sim)"/> 
+      <param name="using_amcl"       value="$(arg using_amcl)"/>
+      <param name="global_frame"     value="/odom" if="$(arg no_static_map)"/>
+      <param name="global_frame"     value="/map"  unless="$(arg no_static_map)"/>
+      <param name="load_waypoints"   value="$(arg use_waypoints)"/>
+      <param name="goal_timeout_sec" value="300"/>
+      <param name="platform_mode"    value="tractor"/>
+   </node>
+   
+</launch>

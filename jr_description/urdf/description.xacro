@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+
+<robot name="segway_robot" xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <xacro:include filename="$(find jr_description)/robots/jr_sibot.urdf.xacro" />
+  <xacro:segway_robot />
+
+</robot>

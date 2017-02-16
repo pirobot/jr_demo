@@ -20,6 +20,9 @@ class PointcloudCOG():
         # Set the shutdown function
         rospy.on_shutdown(self.shutdown)
         
+        # Minimum number of points in order to track
+        self.min_points = rospy.get_param('~min_points', 750)
+        
         # COG publisher
         self.cog_publisher = rospy.Publisher('nearest_cloud_cog', PointStamped, queue_size=1)
 
@@ -48,8 +51,8 @@ class PointcloudCOG():
             z += pt_z
             n += 1
         
-       # If we have points, compute the centroid coordinates
-        if n:
+        # If we have enough points, compute the centroid coordinates
+        if n > self.min_points:
             x /= n 
             y /= n 
             z /= n

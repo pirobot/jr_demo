@@ -67,15 +67,15 @@ def create_location_markers(marker_scale=0.5, frame_id='map', locations=None, sh
             label_marker.id = 100 + int(location_marker.id)
             label_marker.type = Marker.TEXT_VIEW_FACING
             label_marker.scale.z = marker_scale
-            label_marker.pose.position.x = location_marker.pose.position.x + 1.2
+            label_marker.pose.position.x = location_marker.pose.position.x + 1.2 * 2 * marker_scale
             if location['name'] == 'keynotes':
-                label_marker.pose.position.y = location_marker.pose.position.y - 1.0
+                label_marker.pose.position.y = location_marker.pose.position.y - 1.0 * 2 * marker_scale
             elif location['name'] == 'tutorials':
-                label_marker.pose.position.y = location_marker.pose.position.y - 0.5
+                label_marker.pose.position.y = location_marker.pose.position.y - 0.5 * 2 * marker_scale
             elif location['name'] == 'exhibits':
-                label_marker.pose.position.y = location_marker.pose.position.y - 0.0
+                label_marker.pose.position.y = location_marker.pose.position.y - 0.0 * 2 * marker_scale
             else:
-                label_marker.pose.position.y = location_marker.pose.position.y + 0.5
+                label_marker.pose.position.y = location_marker.pose.position.y + 0.5 * 2 * marker_scale
 
             location_markers.markers.append(label_marker)
                 

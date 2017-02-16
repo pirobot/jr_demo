@@ -4,7 +4,6 @@
     jr_nav_server.py - Version 1.0 2016-09-10
     
     Move the robot to a specified location.
-    Uses the pi_trees package to implement a behavior tree task manager.
     
     Created for the Pi Robot Project: http://www.pirobot.org
     Copyright (c) 2016 Patrick Goebel.  All rights reserved.
@@ -28,7 +27,6 @@ from actionlib import GoalStatus
 from move_base_msgs.msg import MoveBaseAction, MoveBaseGoal, MoveBaseActionFeedback
 from std_msgs.msg import Float32
 from geometry_msgs.msg import Twist, Pose, PoseStamped, PoseWithCovarianceStamped
-#from pi_trees_ros.pi_trees_ros import *
 from jr_utils.utilities import create_location_markers
 from jr_msgs.msg import Location
 from jr_msgs.srv import GotoLocation, GotoLocationResponse, GotoLocationRequest

@@ -1,8 +1,8 @@
 <launch>
 <!-- launch gmapping -->
     <node pkg="gmapping" type="slam_gmapping" name="slam_gmapping" output="screen" clear_params="true">
-	    <remap from="scan" to="/sibot/filtered_sick_scan" />
-	    <param name="base_frame" value="/sibot/base_link"/>
+	    <remap from="scan" to="/segway/filtered_scan" />
+	    <param name="base_frame" value="/segway/base_link"/>
 	    <param name="map_frame" value="/map"/>
 	    <param name="odom_frame" value="/odom"/>
 	    <param name="map_update_interval" value="1.0"/>			<!-- How long (in seconds) between updates to the map. Lowering this number updates the occupancy grid more often, at the expense of greater computational load -->

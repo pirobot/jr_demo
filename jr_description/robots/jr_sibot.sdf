@@ -1,0 +1,740 @@
+<sdf version='1.4'>
+  <model name='segway_robot'>
+    <link name='base_link'>
+      <pose>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>-0.0802127 2.38311e-05 0.260256 0 -0 0</pose>
+        <mass>44.5766</mass>
+        <inertia>
+          <ixx>1.76731</ixx>
+          <ixy>0.0178759</ixy>
+          <ixz>0.168292</ixz>
+          <iyy>201.469</iyy>
+          <iyz>0.000257081</iyz>
+          <izz>1.6283</izz>
+        </inertia>
+      </inertial>
+      <collision name='base_link_collision_asus_head_link'>
+        <pose>-0.23775 0 0.97 -0.35 -4.54955e-07 1.5708</pose>
+        <geometry>
+          <mesh>
+            <scale>0.0254 0.0254 0.0254</scale>
+            <uri>model://jr_description/meshes/collision/sensors/asus_xtion_pro_live.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode/>
+          </contact>
+          <friction>
+            <ode/>
+          </friction>
+        </surface>
+      </collision>
+      <collision name='base_link_collision_base_laser_link'>
+        <pose>0.29345 0 0.358018 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.1 0.1 0.1</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <ode/>
+          </contact>
+          <friction>
+            <ode/>
+          </friction>
+        </surface>
+      </collision>
+      <collision name='base_link_collision_head'>
+        <pose>-0.18805 0 0.76805 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.1311 0.12 0.0591</size>
+          </box>
+        </geometry>
+      </collision>
+      <collision name='base_link_collision_inertial_collision_link'>
+        <pose>0 0 0.158018 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://jr_description/meshes/collision/RMP210_chassis_collision.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <collision name='base_link_collision_rear_caster_plate_link'>
+        <pose>-0.314721 0 0.18227 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://segway_description/meshes/collision/caster_plate_collision.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <collision name='base_link_collision_sibot_case_link'>
+        <pose>0 0 0.025 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>0.9 1 0.9</scale>
+            <uri>model://jr_description/meshes/sibot_case.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name='base_link_visual'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.05 0.05 0.001</size>
+          </box>
+        </geometry>
+      </visual>
+      <visual name='base_link_visual_asus_head_link'>
+        <pose>-0.23775 0 0.97 0 -0.35 0</pose>
+        <geometry>
+          <mesh>
+            <scale>0.0254 0.0254 0.0254</scale>
+            <uri>model://jr_description/meshes/visual/sensors/asus_xtion_pro_live.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <visual name='base_link_visual_aux_battery_link'>
+        <pose>-0.07845 0 0.351293 3.14159 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://segway_description/meshes/visual/battery.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <visual name='base_link_visual_base_chassis_link'>
+        <pose>0 0 0.158018 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://segway_description/meshes/visual/std_gearbox_chassis.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <visual name='base_link_visual_base_laser_link'>
+        <pose>0.29345 0 0.358018 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://jr_description/meshes/visual/sensors/sick_lms1xx.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <visual name='base_link_visual_head'>
+        <pose>-0.13775 0 0.77 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://multisense_sl_description/meshes/head.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <visual name='base_link_visual_head_imu_link'>
+        <pose>-0.18525 0.035 0.77 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.01 0.01 0.01</size>
+          </box>
+        </geometry>
+      </visual>
+      <visual name='base_link_visual_left_spacer_link'>
+        <pose>0 0.19582 0.164668 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://segway_description/meshes/visual/single_spacer.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <visual name='base_link_visual_mcu_1_battery_link'>
+        <pose>-0.09298 0 0.158018 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://segway_description/meshes/visual/battery.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <visual name='base_link_visual_rear_caster_plate_link'>
+        <pose>-0.314721 0 0.18227 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://segway_description/meshes/visual/caster_plate.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <visual name='base_link_visual_right_spacer_link'>
+        <pose>0 -0.19582 0.164668 0 -0 3.14159</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://segway_description/meshes/visual/single_spacer.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <visual name='base_link_visual_sibot_case_link'>
+        <pose>0 0 0.025 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>0.9 1 0.9</scale>
+            <uri>model://jr_description/meshes/sibot_case.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <visual name='base_link_visual_ui_box_link'>
+        <pose>-0.1016 0 0.285318 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://segway_description/meshes/visual/ui_box.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <visual name='base_link_visual_ui_box_mount_link'>
+        <pose>-0.1016 0 0.285318 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://segway_description/meshes/visual/ui_box_spacer_mount.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <velocity_decay>
+        <linear>0</linear>
+        <angular>0</angular>
+      </velocity_decay>
+      <sensor name='base_hokuyo_laser' type='ray'>
+        <visualize>0</visualize>
+        <update_rate>50</update_rate>
+        <ray>
+          <scan>
+            <horizontal>
+              <samples>720</samples>
+              <resolution>1</resolution>
+              <min_angle>-1.5708</min_angle>
+              <max_angle>1.5708</max_angle>
+            </horizontal>
+          </scan>
+          <range>
+            <min>0.1</min>
+            <max>20</max>
+            <resolution>0.01</resolution>
+          </range>
+          <noise>
+            <type>gaussian</type>
+            <mean>0</mean>
+            <stddev>0.01</stddev>
+          </noise>
+        </ray>
+        <plugin name='hokuyo_node' filename='libgazebo_ros_laser.so'>
+          <topicName>/segway/base_scan</topicName>
+          <frameName>/segway/base_laser_link</frameName>
+        </plugin>
+        <pose>0.29345 0 0.358018 0 -0 0</pose>
+      </sensor>
+      <velocity_decay>
+        <linear>0</linear>
+        <angular>0</angular>
+      </velocity_decay>
+      <sensor name='asus_head' type='depth'>
+        <always_on>1</always_on>
+        <update_rate>20</update_rate>
+        <camera name='__default__'>
+          <horizontal_fov>1.0472</horizontal_fov>
+          <image>
+            <format>R8G8B8</format>
+            <width>640</width>
+            <height>480</height>
+          </image>
+          <clip>
+            <near>0.05</near>
+            <far>8</far>
+          </clip>
+        </camera>
+        <plugin name='kinect_asus_head_controller' filename='libgazebo_ros_openni_kinect.so'>
+          <cameraName>asus_head</cameraName>
+          <alwaysOn>true</alwaysOn>
+          <updateRate>10</updateRate>
+          <imageTopicName>rgb/image_raw</imageTopicName>
+          <depthImageTopicName>depth/image_raw</depthImageTopicName>
+          <pointCloudTopicName>depth/points</pointCloudTopicName>
+          <cameraInfoTopicName>rgb/camera_info</cameraInfoTopicName>
+          <depthImageCameraInfoTopicName>depth/camera_info</depthImageCameraInfoTopicName>
+          <frameName>/segway/asus_head_rgb_optical_frame</frameName>
+          <baseline>0.1</baseline>
+          <distortion_k1>0.0</distortion_k1>
+          <distortion_k2>0.0</distortion_k2>
+          <distortion_k3>0.0</distortion_k3>
+          <distortion_t1>0.0</distortion_t1>
+          <distortion_t2>0.0</distortion_t2>
+          <pointCloudCutoff>0.4</pointCloudCutoff>
+          <pointCloudCutoffMax>5.0</pointCloudCutoffMax>
+        </plugin>
+        <pose>-0.23775 0 0.97 0 -0.35 0</pose>
+      </sensor>
+      <velocity_decay>
+        <linear>0</linear>
+        <angular>0</angular>
+      </velocity_decay>
+      <sensor name='head_imu_sensor' type='imu'>
+        <always_on>1</always_on>
+        <update_rate>1000</update_rate>
+        <imu>
+          <noise>
+            <type>gaussian</type>
+            <rate>
+              <mean>0</mean>
+              <stddev>0.0002</stddev>
+              <bias_mean>7.5e-06</bias_mean>
+              <bias_stddev>8e-07</bias_stddev>
+            </rate>
+            <accel>
+              <mean>0</mean>
+              <stddev>0.017</stddev>
+              <bias_mean>0.1</bias_mean>
+              <bias_stddev>0.001</bias_stddev>
+            </accel>
+          </noise>
+        </imu>
+        <pose>-0.18525 0.035 0.77 0 -0 0</pose>
+      </sensor>
+      <gravity>1</gravity>
+      <velocity_decay>
+        <linear>0</linear>
+        <angular>0</angular>
+      </velocity_decay>
+      <self_collide>0</self_collide>
+      <sensor name='stereo_camera' type='multicamera'>
+        <update_rate>30</update_rate>
+        <camera name='left'>
+          <horizontal_fov>1.39626</horizontal_fov>
+          <image>
+            <width>800</width>
+            <height>800</height>
+            <format>R8G8B8</format>
+          </image>
+          <clip>
+            <near>0.02</near>
+            <far>300</far>
+          </clip>
+          <noise>
+            <type>gaussian</type>
+            <mean>0</mean>
+            <stddev>0.007</stddev>
+          </noise>
+        </camera>
+        <camera name='right'>
+          <pose>0 -0.07 0 0 -0 0</pose>
+          <horizontal_fov>1.39626</horizontal_fov>
+          <image>
+            <width>800</width>
+            <height>800</height>
+            <format>R8G8B8</format>
+          </image>
+          <clip>
+            <near>0.02</near>
+            <far>300</far>
+          </clip>
+          <noise>
+            <type>gaussian</type>
+            <mean>0</mean>
+            <stddev>0.007</stddev>
+          </noise>
+        </camera>
+        <plugin name='stereo_camera_controller' filename='libgazebo_ros_multicamera.so'>
+          <alwaysOn>true</alwaysOn>
+          <updateRate>0.0</updateRate>
+          <cameraName>multisense_sl/camera</cameraName>
+          <imageTopicName>image_raw</imageTopicName>
+          <cameraInfoTopicName>camera_info</cameraInfoTopicName>
+          <frameName>left_camera_optical_frame</frameName>
+          <hackBaseline>0.07</hackBaseline>
+          <distortionK1>0.0</distortionK1>
+          <distortionK2>0.0</distortionK2>
+          <distortionK3>0.0</distortionK3>
+          <distortionT1>0.0</distortionT1>
+          <distortionT2>0.0</distortionT2>
+        </plugin>
+        <pose>-0.13775 0.035 0.768 0 -0 0</pose>
+      </sensor>
+    </link>
+    <link name='left_wheel_link'>
+      <pose>0 0.271195 0.240568 0 -0 0</pose>
+      <inertial>
+        <pose>0 0 0 0 -0 0</pose>
+        <mass>4.19573</mass>
+        <inertia>
+          <ixx>0.06368</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.12141</iyy>
+          <iyz>0</iyz>
+          <izz>0.06368</izz>
+        </inertia>
+      </inertial>
+      <collision name='left_wheel_link_collision'>
+        <pose>0 0 0 1.57079 -0 0</pose>
+        <geometry>
+          <cylinder>
+            <length>0.092249</length>
+            <radius>0.240568</radius>
+          </cylinder>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>1e+07</kp>
+              <kd>10</kd>
+              <min_depth>0.003</min_depth>
+            </ode>
+          </contact>
+          <friction>
+            <ode>
+              <mu>10</mu>
+              <mu2>10</mu2>
+              <fdir1>1 0 0</fdir1>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='left_wheel_link_visual'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://segway_description/meshes/visual/i2_wheel.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <gravity>1</gravity>
+      <velocity_decay>
+        <linear>0</linear>
+        <angular>0</angular>
+      </velocity_decay>
+      <self_collide>0</self_collide>
+    </link>
+    <joint name='left_wheel' type='revolute'>
+      <child>left_wheel_link</child>
+      <parent>base_link</parent>
+      <axis>
+        <xyz>0 1 0</xyz>
+        <limit>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+        </limit>
+        <dynamics/>
+      </axis>
+    </joint>
+    <link name='rear_caster_swivel_link'>
+      <pose>-0.314721 0 0.18227 0 -0 0</pose>
+      <inertial>
+        <pose>-0.020596 0.00028 -0.055367 0 -0 0</pose>
+        <mass>0.579519</mass>
+        <inertia>
+          <ixx>0.001361</ixx>
+          <ixy>-3e-06</ixy>
+          <ixz>0.000347</ixz>
+          <iyy>0.001287</iyy>
+          <iyz>-1e-05</iyz>
+          <izz>0.000632</izz>
+        </inertia>
+      </inertial>
+      <collision name='rear_caster_swivel_link_collision'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://segway_description/meshes/collision/caster_bracket_collision.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>1e+07</kp>
+              <kd>1</kd>
+            </ode>
+          </contact>
+          <friction>
+            <ode>
+              <mu>100</mu>
+              <mu2>100</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='rear_caster_swivel_link_visual'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://segway_description/meshes/visual/caster_bracket.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <gravity>1</gravity>
+      <velocity_decay>
+        <linear>0</linear>
+        <angular>0</angular>
+      </velocity_decay>
+      <self_collide>0</self_collide>
+    </link>
+    <joint name='rear_caster_swivel' type='revolute'>
+      <child>rear_caster_swivel_link</child>
+      <parent>base_link</parent>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+        </limit>
+        <dynamics>
+          <damping>0.7</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='rear_caster_wheel_link'>
+      <pose>-0.352541 0 0.0761903 0 -0 0</pose>
+      <inertial>
+        <pose>0 0 0 0 -0 0</pose>
+        <mass>1.25</mass>
+        <inertia>
+          <ixx>0.001442</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.002493</iyy>
+          <iyz>0</iyz>
+          <izz>0.001442</izz>
+        </inertia>
+      </inertial>
+      <collision name='rear_caster_wheel_link_collision'>
+        <pose>0 0 0 1.57079 -0 0</pose>
+        <geometry>
+          <cylinder>
+            <length>0.05</length>
+            <radius>0.0762</radius>
+          </cylinder>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>1e+07</kp>
+              <kd>10</kd>
+              <min_depth>0.003</min_depth>
+            </ode>
+          </contact>
+          <friction>
+            <ode>
+              <mu>100</mu>
+              <mu2>100</mu2>
+              <fdir1>1 0 0</fdir1>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='rear_caster_wheel_link_visual'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://segway_description/meshes/visual/caster_wheel.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <gravity>1</gravity>
+      <velocity_decay>
+        <linear>0</linear>
+        <angular>0</angular>
+      </velocity_decay>
+      <self_collide>0</self_collide>
+    </link>
+    <joint name='rear_caster_wheel' type='revolute'>
+      <child>rear_caster_wheel_link</child>
+      <parent>rear_caster_swivel_link</parent>
+      <axis>
+        <xyz>0 1 0</xyz>
+        <limit>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+        </limit>
+        <dynamics>
+          <damping>0.2</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='right_wheel_link'>
+      <pose>0 -0.271195 0.240568 0 -0 0</pose>
+      <inertial>
+        <pose>0 0 0 0 -0 0</pose>
+        <mass>4.19573</mass>
+        <inertia>
+          <ixx>0.06368</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.12141</iyy>
+          <iyz>0</iyz>
+          <izz>0.06368</izz>
+        </inertia>
+      </inertial>
+      <collision name='right_wheel_link_collision'>
+        <pose>0 0 0 1.57079 -0 0</pose>
+        <geometry>
+          <cylinder>
+            <length>0.092249</length>
+            <radius>0.240568</radius>
+          </cylinder>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>1e+07</kp>
+              <kd>10</kd>
+              <min_depth>0.003</min_depth>
+            </ode>
+          </contact>
+          <friction>
+            <ode>
+              <mu>10</mu>
+              <mu2>10</mu2>
+              <fdir1>1 0 0</fdir1>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='right_wheel_link_visual'>
+        <pose>0 0 0 0 -0 3.14159</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://segway_description/meshes/visual/i2_wheel.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <gravity>1</gravity>
+      <velocity_decay>
+        <linear>0</linear>
+        <angular>0</angular>
+      </velocity_decay>
+      <self_collide>0</self_collide>
+    </link>
+    <joint name='right_wheel' type='revolute'>
+      <child>right_wheel_link</child>
+      <parent>base_link</parent>
+      <axis>
+        <xyz>0 1 0</xyz>
+        <limit>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+        </limit>
+        <dynamics/>
+      </axis>
+    </joint>
+    <link name='hokuyo_link'>
+      <pose>-0.18235 0 0.858 0 -0 0</pose>
+      <inertial>
+        <pose>0.0124384 0.0004084 -0.0041783 0 -0 0</pose>
+        <mass>0.057664</mass>
+        <inertia>
+          <ixx>0.000401606</ixx>
+          <ixy>4.9927e-08</ixy>
+          <ixz>1.0997e-05</ixz>
+          <iyy>0.00208115</iyy>
+          <iyz>-9.8165e-09</iyz>
+          <izz>0.00178402</izz>
+        </inertia>
+      </inertial>
+      <collision name='hokuyo_link_collision'>
+        <pose>0.01885 0 -0.02119 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.08 0.06 0.04238</size>
+          </box>
+        </geometry>
+      </collision>
+      <visual name='hokuyo_link_visual'>
+        <pose>0.045 -0.0261018 -0.0834237 -0.314 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://multisense_sl_description/meshes/head_camera.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <gravity>1</gravity>
+      <velocity_decay>
+        <linear>0</linear>
+        <angular>0</angular>
+      </velocity_decay>
+      <self_collide>0</self_collide>
+      <sensor name='head_hokuyo_sensor' type='ray'>
+        <visualize>0</visualize>
+        <update_rate>40</update_rate>
+        <ray>
+          <scan>
+            <horizontal>
+              <samples>720</samples>
+              <resolution>1</resolution>
+              <min_angle>-1.5708</min_angle>
+              <max_angle>1.5708</max_angle>
+            </horizontal>
+          </scan>
+          <range>
+            <min>0.1</min>
+            <max>30</max>
+            <resolution>0.01</resolution>
+          </range>
+          <noise>
+            <type>gaussian</type>
+            <mean>0</mean>
+            <stddev>0.01</stddev>
+          </noise>
+        </ray>
+        <plugin name='gazebo_ros_head_hokuyo_controller' filename='libgazebo_ros_laser.so'>
+          <topicName>/multisense_sl/laser/scan</topicName>
+          <frameName>head_hokuyo_frame</frameName>
+        </plugin>
+        <pose>0.03 0 0.015 0 -0 0</pose>
+      </sensor>
+    </link>
+    <joint name='hokuyo_joint' type='revolute'>
+      <child>hokuyo_link</child>
+      <parent>base_link</parent>
+      <axis>
+        <xyz>1 0 0</xyz>
+        <limit>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+        </limit>
+        <dynamics>
+          <damping>0.01</damping>
+        </dynamics>
+      </axis>
+    </joint>
+    <plugin name='multisense_plugin' filename='libMultiSenseSLPlugin.so'/>
+    <plugin name='gazebo_ros_control' filename='libgazebo_ros_control.so'>
+      <robotNamespace>/segway_robot</robotNamespace>
+      <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
+    </plugin>
+    <static>0</static>
+    <plugin name='gps_controller' filename='libhector_gazebo_ros_gps.so'>
+      <alwaysOn>1</alwaysOn>
+      <updateRate>40</updateRate>
+      <topicName>/segway/feedback/gps/fix_2d</topicName>
+      <velocityTopicName>/segway/feedback/gps/vel</velocityTopicName>
+      <referenceLatitude>40.712784</referenceLatitude>
+      <referenceLongitude>-74.005941</referenceLongitude>
+      <referenceHeading>0</referenceHeading>
+      <referenceAltitude>0</referenceAltitude>
+      <drift>0.0001 0.0001 0.0001</drift>
+      <bodyName>base_link</bodyName>
+      <xyzOffset>0.1189 0 -0.504668</xyzOffset>
+      <rpyOffset>0 -0 0</rpyOffset>
+    </plugin>
+  </model>
+</sdf>
